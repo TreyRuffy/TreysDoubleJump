@@ -1,0 +1,10 @@
+main: me.treyruffy.treysdoublejump.TreysDoubleJump
+version: 4.0-1.9
+name: TreysDoubleJump
+author: TreyRuffy
+description: Allows you to double jump!
+permissions:
+  tdj.use:
+    default: true
+  tdj.ncp:
+    default: op
