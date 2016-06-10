@@ -1,5 +1,5 @@
 main: me.treyruffy.treysdoublejump.TreysDoubleJump
-version: 5.0-1.8
+version: 6.0-1.8
 name: TreysDoubleJump
 author: TreyRuffy
 description: Allows you to double jump!
@@ -8,3 +8,5 @@ permissions:
     default: true
   tdj.ncp:
     default: op
+  tdj.particles:
+    default: true

@@ -71,8 +71,9 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			player.setFlying(false);
 			player.setVelocity(player.getLocation().getDirection().multiply(1.6D).setY(1.0D));
 			player.playSound(player.getPlayer().getLocation(), Sound.BAT_TAKEOFF, 0.33F, 0.5F);
-			ParticleEffect.EXPLOSION_NORMAL.display(0, 0, 0, 0, 1, player.getLocation(), 2);
-			
+			if((player.hasPermission("tdj.particles"))){
+				ParticleEffect.EXPLOSION_NORMAL.display(0, 0, 0, 0, 1, player.getLocation(), 2);	
+			}
 		}
 	}
 }
