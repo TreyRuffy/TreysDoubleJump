@@ -1,5 +1,5 @@
 main: me.treyruffy.treysdoublejump.TreysDoubleJump
-version: 1.0.1
+version: 1.0.2
 name: TreysDoubleJump
 author: TreyRuffy
 description: Allows you to double jump!
@@ -22,3 +22,4 @@ permissions:
     description: Use the double jump feature with NCP
   tdj.sounds:
     default: true
+    description: Sounds whilst double jumping.
