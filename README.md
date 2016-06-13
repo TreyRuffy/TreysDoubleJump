@@ -1,1 +1,1 @@
-# Trey's Double Jump for 1.9
+# TreysDoubleJump-1.8
