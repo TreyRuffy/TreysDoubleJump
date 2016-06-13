@@ -1,0 +1,13 @@
+#                       Trey's Double Jump
+#                          By TreyRuffy
+
+# Wiki Link: https://github.com/TreyRuffy/TreysDoubleJump/wiki/Config.yml
+
+Velocity: 1.6
+Sounds:
+    Enabled: true
+    Type: ENTITY_BAT_TAKEOFF
+EnabledWorlds:
+    - world
+    - world_the_end
+    - world_nether

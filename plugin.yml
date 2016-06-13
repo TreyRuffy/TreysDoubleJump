@@ -1,12 +1,27 @@
 main: me.treyruffy.treysdoublejump.TreysDoubleJump
-version: 6.0-1.8
+version: 7.0
 name: TreysDoubleJump
 author: TreyRuffy
 description: Allows you to double jump!
+website: https://www.spigotmc.org/resources/19630/
+prefix: Trey's Double Jump
+softdepend: [NoCheatPlus]
 permissions:
+  tdj.*:
+    default: op
+    description: Be a h4x0r and get all double jump features besides particles.
+    children:
+      tdj.ncp: true
+      tdj.use: true
+      tdj.particles: true
+      tdj.nofall: true
+      tdj.sounds: true
   tdj.use:
     default: true
+    description: Use the double jump feature
   tdj.ncp:
     default: op
-  tdj.particles:
+    description: Use the double jump feature with NCP
+  tdj.sounds:
     default: true
+    description: Sounds whilst double jumping.
