@@ -1,32 +1,21 @@
-//   This program is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package me.treyruffy.treysdoublejump;
 
+import fr.neatmonster.nocheatplus.checks.CheckType;
+import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
+import java.io.IOException;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 public class TreysDoubleJump
   extends JavaPlugin
@@ -37,12 +26,12 @@ public class TreysDoubleJump
     getServer().getPluginManager().registerEvents(this, this);
     getConfig().options().copyDefaults(true);
     saveConfig();
-    try
-    {
-      Metrics metrics = new Metrics(this);
-      metrics.start();
+    try {
+        Metrics metrics = new Metrics(this);
+        metrics.start();
+    } catch (IOException e) {
+        // Failed to submit the stats :-(
     }
-    catch (IOException localIOException) {}
   }
   
   List<String> EnabledWorlds = getConfig().getStringList("EnabledWorlds");
@@ -50,9 +39,17 @@ public class TreysDoubleJump
   @EventHandler
   public void onEntityDamage(EntityDamageEvent d)
   {
-    if (((d.getEntity() instanceof Player)) && (d.getCause() == EntityDamageEvent.DamageCause.FALL)) {
-      d.setCancelled(true);
-    }
+	 if ((d.getEntity() instanceof Player)){
+		 Player player = (Player)d.getEntity();
+		 if ((d.getCause().equals(EntityDamageEvent.DamageCause.FALL)) && (player.hasPermission("tdj.nofall"))){
+			 for (String w: this.EnabledWorlds){
+				 World world = Bukkit.getWorld(w);
+				 if(player.getWorld().equals(world)){
+					 d.setCancelled(true);
+				 }
+			 }
+		 }
+	 }
   }
   
   @EventHandler
