@@ -13,8 +13,6 @@ permissions:
     children:
       tdj.ncp: true
       tdj.use: true
-      tdj.particles: true
-      tdj.nofall: true
       tdj.sounds: true
   tdj.use:
     default: true
