@@ -1,7 +1,35 @@
-#                       Trey's Double Jump
-#                          By TreyRuffy
+# ---------------------------------- #
+# +--------------------------------+
+# |       Trey's Double Jump       |
+# | An amazing double jump plugin! |
+# |         (c): TreyRuffy         |
+# +--------------------------------+
+# ---------------------------------- #
 
-# Wiki Link: https://github.com/TreyRuffy/TreysDoubleJump/wiki/Config.yml
+# ----------------------------------------------------------------------------- #
+# +---------------------------------------------------------------------------+
+# |Permissions: These are all of the permissions.                             |
+# |             tdj.*       - Gives all the permissions to a player           |
+# |             tdj.use     - Allows you to use the double jump feature       |
+# |             tdj.ncp     - Used if you have NoCheatPlus                    |
+# |             tdj.sounds  - Allows you to hear sounds whilst double jumping |
+# +---------------------------------------------------------------------------+
+# ----------------------------------------------------------------------------- #
+
+# ------------------------------------------------------------------------------------------------------------------- #
+# +-----------------------------------------------------------------------------------------------------------------+
+# | Velocity: 1.6 # Allows you to set the jump distance                                                             |
+# | Sounds: # Sound section                                                                                         |
+# |   Enabled: true # Do you want players with tdj.sounds to play sounds when double jumping                        |
+# |   Type: ENTITY_BAT_TAKEOFF # The type of sound played if the above option is true                               |
+# |   # Go to http://dev.bukkit.org/bukkit-plugins/treys-double-jump/pages/config-yml/sounds/ to see the sound list |
+# |   # ENTITY_ is NOT needed on 1.8 versions                                                                       |
+# | EnabledWorlds: # The worlds you want double jumping and no fall damage enabled in                               |
+# |   - world                                                                                                       |
+# |   - world_the_end                                                                                               |
+# |   - world_nether                                                                                                |
+# +-----------------------------------------------------------------------------------------------------------------+
+# ------------------------------------------------------------------------------------------------------------------- #
 
 Velocity: 1.6
 Sounds:
