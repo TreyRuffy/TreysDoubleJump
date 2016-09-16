@@ -13,14 +13,15 @@
 # |             tdj.use     - Allows you to use the double jump feature       |
 # |             tdj.ncp     - Used if you have NoCheatPlus                    |
 # |             tdj.sounds  - Allows you to hear sounds whilst double jumping |
+# |             tdj.fly     - Allows you to fly (NOTE: You still need tdj.use)| 
 # +---------------------------------------------------------------------------+
 # ----------------------------------------------------------------------------- #
 
 # ------------------------------------------------------------------------------------------------------------------- #
 # +-----------------------------------------------------------------------------------------------------------------+
 # | Velocity: # Velocity section                                                                                    |
-# |   Foreword: 1.6 # Allows you to set the forewords jump distance                                                    |
-# |   Up: 1 # Allows you to set the upwards jump distance 
+# |   Forward: 1.6 # Allows you to set the forwards jump distance                                                   |
+# |   Up: 1 # Allows you to set the upwards jump distance                                                           |
 # | Sounds: # Sound section                                                                                         |
 # |   Enabled: true # Do you want players with tdj.sounds to play sounds when double jumping                        |
 # |   Type: ENTITY_BAT_TAKEOFF # The type of sound played if the above option is true                               |
@@ -29,12 +30,12 @@
 # | EnabledWorlds: # The worlds you want double jumping and no fall damage enabled in                               |
 # |   - world                                                                                                       |
 # |   - world_the_end                                                                                               |
-# |   - world_nether                                                                                                |                                         |
+# |   - world_nether                                                                                                |
 # +-----------------------------------------------------------------------------------------------------------------+
 # ------------------------------------------------------------------------------------------------------------------- #
 
 Velocity:
-    Foreword: 1.6
+    Forward: 1.6
     Up: 1
 Sounds:
     Enabled: true

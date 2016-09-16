@@ -1,5 +1,5 @@
 main: me.treyruffy.treysdoublejump.TreysDoubleJump
-version: 1.0.6
+version: 1.0.7
 name: TreysDoubleJump
 author: TreyRuffy
 description: Allows you to double jump!
@@ -9,17 +9,17 @@ softdepend: [NoCheatPlus]
 permissions:
   tdj.*:
     default: op
-    description: Be a h4x0r and get all double jump features besides particles.
+    description: Be a h4x0r and get all double jump features.
     children:
       tdj.ncp: true
       tdj.use: true
       tdj.sounds: true
   tdj.use:
     default: true
-    description: Use the double jump feature
+    description: Use the double jump feature.
   tdj.ncp:
     default: op
-    description: Use the double jump feature with NCP
+    description: Use the double jump feature with NCP.
   tdj.sounds:
     default: true
     description: Sounds whilst double jumping.
