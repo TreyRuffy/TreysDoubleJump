@@ -1,9 +1,9 @@
 main: me.treyruffy.treysdoublejump.TreysDoubleJump
-version: 1.0.4
+version: 1.0.6
 name: TreysDoubleJump
 author: TreyRuffy
 description: Allows you to double jump!
-website: http://dev.bukkit.org/bukkit-plugins/treys-double-jump
+website: http://dev.bukkit.org/bukkit-plugins/treys-double-jump/
 prefix: Trey's Double Jump
 softdepend: [NoCheatPlus]
 permissions:

@@ -97,7 +97,7 @@ public class TreysDoubleJump
       event.setCancelled(true);
       player.setAllowFlight(false);
       player.setFlying(false);
-      player.setVelocity(player.getLocation().getDirection().multiply(getConfig().getDouble("Velocity")).setY(1.0D));
+      player.setVelocity(player.getLocation().getDirection().multiply(getConfig().getDouble("Velocity.Foreword")).setY(getConfig().getDouble("Velocity.Up")));
       if ((player.hasPermission("tdj.sound")) && (getConfig().getBoolean("Sounds.Enabled"))) {
         player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Sounds.Type")), 1.0F, 0.0F);
       }

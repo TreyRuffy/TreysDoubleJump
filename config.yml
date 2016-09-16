@@ -18,7 +18,9 @@
 
 # ------------------------------------------------------------------------------------------------------------------- #
 # +-----------------------------------------------------------------------------------------------------------------+
-# | Velocity: 1.6 # Allows you to set the jump distance                                                             |
+# | Velocity: # Velocity section                                                                                    |
+# |   Foreword: 1.6 # Allows you to set the forewords jump distance                                                    |
+# |   Up: 1 # Allows you to set the upwards jump distance 
 # | Sounds: # Sound section                                                                                         |
 # |   Enabled: true # Do you want players with tdj.sounds to play sounds when double jumping                        |
 # |   Type: ENTITY_BAT_TAKEOFF # The type of sound played if the above option is true                               |
@@ -27,11 +29,13 @@
 # | EnabledWorlds: # The worlds you want double jumping and no fall damage enabled in                               |
 # |   - world                                                                                                       |
 # |   - world_the_end                                                                                               |
-# |   - world_nether                                                                                                |
+# |   - world_nether                                                                                                |                                         |
 # +-----------------------------------------------------------------------------------------------------------------+
 # ------------------------------------------------------------------------------------------------------------------- #
 
-Velocity: 1.6
+Velocity:
+    Foreword: 1.6
+    Up: 1
 Sounds:
     Enabled: true
     Type: ENTITY_BAT_TAKEOFF
