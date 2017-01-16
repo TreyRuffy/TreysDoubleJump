@@ -6,27 +6,34 @@
 # +--------------------------------+
 # ---------------------------------- #
 
-# ----------------------------------------------------------------------------- #
-# +---------------------------------------------------------------------------+
-# |Permissions: These are all of the permissions.                             |
-# |             tdj.*       - Gives all the permissions to a player           |
-# |             tdj.use     - Allows you to use the double jump feature       |
-# |             tdj.ncp     - Used if you have NoCheatPlus                    |
-# |             tdj.sounds  - Allows you to hear sounds whilst double jumping |
-# |             tdj.fly     - Allows you to fly (NOTE: You still need tdj.use)| 
-# +---------------------------------------------------------------------------+
-# ----------------------------------------------------------------------------- #
+# ------------------------------------------------------------------------------------- #
+# +-----------------------------------------------------------------------------------+
+# | Permissions: These are all of the permissions.                                    |
+# |             tdj.*       - Gives all the permissions to a player                   |
+# |             tdj.use     - Allows you to use the double jump feature               |
+# |             tdj.ncp     - Used if you have NoCheatPlus                            |
+# |             tdj.sounds     - Allows you to hear sounds whilst double jumping      |
+# |             tdj.particles  - Allows you to summon particles whilst double jumping |
+# +-----------------------------------------------------------------------------------+
+# ------------------------------------------------------------------------------------- #
 
 # ------------------------------------------------------------------------------------------------------------------- #
 # +-----------------------------------------------------------------------------------------------------------------+
+# | UseMetrics: true # Do you want to use Metrics on this plugin?                                                   |
+# | LowerVersions: false # Toggle this on if you are using 1.8                                                      |
 # | Velocity: # Velocity section                                                                                    |
 # |   Forward: 1.6 # Allows you to set the forwards jump distance                                                   |
 # |   Up: 1 # Allows you to set the upwards jump distance                                                           |
 # | Sounds: # Sound section                                                                                         |
 # |   Enabled: true # Do you want players with tdj.sounds to play sounds when double jumping                        |
-# |   Type: ENTITY_BAT_TAKEOFF # The type of sound played if the above option is true                               |
-# |   # Go to http://dev.bukkit.org/bukkit-plugins/treys-double-jump/pages/config-yml/sounds/ to see the sound list |
-# |   # ENTITY_ is NOT needed on 1.8 versions                                                                       |
+# |   Type: BAT_TAKEOFF # The type of sound played if the above option is true                                      |
+# |   # Go to https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html to see the sound list                  |
+# |   ## ENTITY_ is not needed in 1.8 ##                                                                            |
+# | Particles: # Particles section                                                                                  |
+# |   Enabled: true # Do you want players with tdj.particles to summon particles when double jumping                |
+# |   Type: EXPLOSION_NORMAL # The type of particle played if the above option is true                              |
+# |   # Go to https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Particle.html to see the particle list            |
+# |   Amount: 5 # The amount of particles you want it to summon, if particles are enabled                           |
 # | EnabledWorlds: # The worlds you want double jumping and no fall damage enabled in                               |
 # |   - world                                                                                                       |
 # |   - world_the_end                                                                                               |
@@ -34,12 +41,18 @@
 # +-----------------------------------------------------------------------------------------------------------------+
 # ------------------------------------------------------------------------------------------------------------------- #
 
+UseMetrics: true
+LowerVersions: false
 Velocity:
     Forward: 1.6
     Up: 1
 Sounds:
     Enabled: true
     Type: ENTITY_BAT_TAKEOFF
+Particles:
+    Enabled: true
+    Type: EXPLOSION_NORMAL
+    Amount: 5
 EnabledWorlds:
     - world
     - world_the_end
