@@ -1,0 +1,49 @@
+main: me.treyruffy.treysdoublejump.TreysDoubleJump
+version: ${project.version}
+name: ${project.name}
+author: TreyRuffy
+description: ${project.description}
+website: ${project.url}
+prefix: Trey's Double Jump
+softdepend: [NoCheatPlus]
+permissions:
+  tdj.*:
+    default: op
+    description: Be a h4x0r and get all double jump features.
+    children:
+      tdj.ncp: true
+      tdj.use: true
+      tdj.sounds: true
+      tdj.particles: true
+      tdj.command: true
+      tdj.nofall: true
+  tdj.use:
+    default: true
+    description: Use the double jump feature.
+  tdj.ncp:
+    default: op
+    description: Use the double jump feature with NCP.
+  tdj.sounds:
+    default: true
+    description: Sounds whilst double jumping.
+  tdj.particles:
+    default: true
+    description: Particles whilst double jumping.
+  tdj.command:
+    default: true
+    description: /dj
+  tdj.nofall:
+    default: true
+    description: No fall when you have double jump on.
+  tdj.fly:
+    default: op
+    description: Allows you to fly!
+commands:
+  tdj:
+    description: Allows you to toggle double jumping.
+    usage: /<command>
+    aliases: [dj,doublejump,treysdoublejump]
+  fly:
+    description: Allows you to fly!
+    usage: /<command>
+    aliases: [flight,togglefly,toggleflight]
