@@ -94,6 +94,9 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 								return false;
 							}
 						}
+					} else {
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.FlyCommandDisabled")));
+						return false;
 					}
 				}
 			}
@@ -175,7 +178,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 					player.setFlying(false);
 					player.setVelocity(player.getLocation().getDirection().multiply(getConfig().getDouble("Velocity.Forward")).setY(getConfig().getDouble("Velocity.Up")));
 					if ((player.hasPermission("tdj.sounds")) && (getConfig().getBoolean("Sounds.Enabled"))) {
-						player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Sounds.Type")), 1.0F, 0.0F);
+						player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Sounds.Type")), getConfig().getInt("Sounds.Volume"), getConfig().getInt("Sounds.Pitch"));
 					} 
 			    	if ((player.hasPermission("tdj.particles")) && (getConfig().getBoolean("Particles.Enabled"))){
 			    		ParticlesMain particles = null;

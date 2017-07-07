@@ -41,9 +41,7 @@ permissions:
 commands:
   tdj:
     description: Allows you to toggle double jumping.
-    usage: /<command>
     aliases: [dj,doublejump,treysdoublejump]
   fly:
     description: Allows you to fly!
-    usage: /<command>
     aliases: [flight,togglefly,toggleflight]

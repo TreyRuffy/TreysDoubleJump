@@ -5,7 +5,6 @@
 # |         (c): TreyRuffy         |
 # +--------------------------------+
 # ---------------------------------- #
-
 # ------------------------------------------------------------------------------------- #
 # +-----------------------------------------------------------------------------------+
 # | Permissions: These are all of the permissions.                                    |
@@ -17,69 +16,56 @@
 # |             tdj.particles  - Allows you to summon particles whilst double jumping |
 # +-----------------------------------------------------------------------------------+
 # ------------------------------------------------------------------------------------- #
-
 Messages:
     ToggledOff: '&6You have &c&ldisabled &6your double jump!'
-    # Disabled message
-    
+    #Disabled message
     FlyToggledOff: '&6You have &c&ldisabled&6 your flight!'
-    # Disabled message for fly
-    
+    #Disabled message for fly
     ToggledOn: '&6You have &a&lenabled &6your double jump!'
-    # Enabled message
-    
+    #Enabled message
     FlyToggledOn: '&6You have &a&lenabled&6 your flight!'
-    # Enabled message for fly
-    
+    #Enabled message for fly
     PlayersOnly: '&cYou must be a player to execute this command.'
-    # Saying only players can execute the command
-    
+    #Saying only players can execute the command
     NoPermission: '&cYou do not have permission to execute this command.'
-    # No permissions for the command.
-
+    #No permissions for the command.
+    FlyCommandDisabled: '&dThe fly command is disabled'
+    #If Flight is disabled below, you will receive this message
 Flight:
     Enabled: true
-    # Allows you to enable /fly
-
+    #Allows you to enable /fly
 Velocity:
     Forward: 1.6
-    # Allows you to set the forwards jump distance
-    
+    #Allows you to set the forwards jump distance
     Up: 1
-    # Allows you to set the upwards jump distance
-    
+    #Allows you to set the upwards jump distance
 Sounds:
     Enabled: true
-    # Do you want players with tdj.sounds to play sounds when double jumping?
-    
+    #Do you want players with tdj.sounds to play sounds when double jumping?
     Type: ENTITY_BAT_TAKEOFF
-    # The type of sound played if the above option is true
-
+    #The type of sound played if the above option is true
+    Volume: 1.0
+    #The volume of the sound
+    Pitch: 1.0
+    #The pitch of the sound
 Particles:
     Enabled: true
-    # Do you want players with tdj.particles to summon particles when double jumping?
-    
+    #Do you want players with tdj.particles to summon particles when double jumping?
     Type: EXPLOSION_NORMAL
-    # The type of particle played if the above option is true
-    
+    #The type of particle played if the above option is true
     AllPlayers: true
-    # Do you want all players to see the player's particles when double jumping?
-    
+    #Do you want all players to see the player's particles when double jumping?
     Amount: 5
-    # The amount of particles you want it to summon, if particles are enabled
-    
-    ## If REDSTONE particles are used, you can set the RGB values using R G B!
+    #The amount of particles you want it to summon, if particles are enabled
+    ##If REDSTONE particles are used, you can set the RGB values using R G B!
     R: 0
-    # Red value. (Leave as 0 if you are not using REDSTONE particles)
-    
+    #Red value. (Leave as 0 if you are not using REDSTONE particles)
     G: 0
-    # Green value. (Leave as 0 if you are not using REDSTONE particles)
-    
+    #Green value. (Leave as 0 if you are not using REDSTONE particles)
     B: 0
-    # Blue value. (Leave as 0 if you are not using REDSTONE particles)
-    
+    #Blue value. (Leave as 0 if you are not using REDSTONE particles)
 EnabledWorlds:
     - world
     - world_the_end
     - world_nether
-    # The worlds you want double jumping and no fall damage enabled in
+    #The worlds you want double jumping and no fall damage enabled in
