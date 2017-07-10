@@ -17,6 +17,7 @@ import me.treyruffy.treysdoublejump.NMS.v1_9_R1.Particle_1_9_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R2.Particle_1_9_R2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -34,16 +35,21 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
 	List<String> EnabledWorlds = getConfig().getStringList("EnabledWorlds");
 	List<String> DisabledPlayers = new ArrayList<String>();
 	List<String> Flying = new ArrayList<String>();
+	private HashMap<Player, Integer> cooldownTime;
+	private HashMap<Player, BukkitRunnable> cooldownTask;
 	
 	public void onEnable(){
 		getServer().getPluginManager().registerEvents(this, this);
 		getConfig().options().copyDefaults(true);
 		saveConfig();
+		cooldownTime = new HashMap<Player, Integer>();
+		cooldownTask = new HashMap<Player, BukkitRunnable>();
 		
 		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 		if ((version.equals("v1_7_R1")||version.equals("v1_7_R2")||version.equals("v1_7_R3")||version.equals("v1_7_R4")||version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){
@@ -128,33 +134,35 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		final Player player = event.getPlayer();
 		if (!Flying.contains(player.getUniqueId().toString())){
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
-				if ((player.getGameMode() != GameMode.CREATIVE) && (player.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-					  if (EnabledWorlds.contains(player.getWorld().getName())){
-						  if (player.hasPermission("tdj.use")){
-							  if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
-								  if (player.hasPermission("tdj.ncp")) {
-									  NCPExemptionManager.exemptPermanently(player, CheckType.MOVING_SURVIVALFLY);
-									  player.setAllowFlight(true);
-									  Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-										
-										@Override
-										public void run() {
-											NCPExemptionManager.unexempt(player, CheckType.MOVING_SURVIVALFLY);;
-										}
-									}, 60L);
+				if (!cooldownTime.containsKey(player)){
+					if ((player.getGameMode() != GameMode.CREATIVE) && (player.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
+						  if (EnabledWorlds.contains(player.getWorld().getName())){
+							  if (player.hasPermission("tdj.use")){
+								  if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
+									  if (player.hasPermission("tdj.ncp")) {
+										  NCPExemptionManager.exemptPermanently(player, CheckType.MOVING_SURVIVALFLY);
+										  player.setAllowFlight(true);
+										  Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+											
+											@Override
+											public void run() {
+												NCPExemptionManager.unexempt(player, CheckType.MOVING_SURVIVALFLY);;
+											}
+										}, 60L);
+									  } else {
+										  player.setAllowFlight(false);
+									  }
 								  } else {
-									  player.setAllowFlight(false);
+									  player.setAllowFlight(true);
 								  }
 							  } else {
-								  player.setAllowFlight(true);
+								  player.setAllowFlight(false);
 							  }
 						  } else {
 							  player.setAllowFlight(false);
 						  }
-					  } else {
-						  player.setAllowFlight(false);
 					  }
-				  }
+				}
 			} else {
 				player.setAllowFlight(false);
 			}
@@ -169,13 +177,30 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
   
 	@EventHandler
 	public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
-		Player player = event.getPlayer();
+		final Player player = event.getPlayer();
 		if (!Flying.contains(player.getUniqueId().toString())){
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
 				if ((player.getGameMode() != GameMode.CREATIVE) && ((player.hasPermission("tdj.use")) && (this.EnabledWorlds.contains(player.getWorld().getName())))){
 					event.setCancelled(true);
 					player.setAllowFlight(false);
 					player.setFlying(false);
+					
+					if (getConfig().getBoolean("Cooldown.Enabled")){
+						cooldownTime.put(player, getConfig().getInt("Cooldown.Time"));
+						cooldownTask.put(player, new BukkitRunnable() {
+							@Override
+							public void run() {
+								cooldownTime.put(player, cooldownTime.get(player) - 1);
+								if (cooldownTime.get(player) == 0){
+									cooldownTime.remove(player);
+									cooldownTask.remove(player);
+									cancel();
+								}
+							}
+						});
+						cooldownTask.get(player).runTaskTimer(this, 20, 20);
+					}
+					
 					player.setVelocity(player.getLocation().getDirection().multiply(getConfig().getDouble("Velocity.Forward")).setY(getConfig().getDouble("Velocity.Up")));
 					if ((player.hasPermission("tdj.sounds")) && (getConfig().getBoolean("Sounds.Enabled"))) {
 						player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Sounds.Type")), getConfig().getInt("Sounds.Volume"), getConfig().getInt("Sounds.Pitch"));

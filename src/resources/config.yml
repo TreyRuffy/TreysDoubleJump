@@ -34,6 +34,9 @@ Messages:
 Flight:
     Enabled: true
     #Allows you to enable /fly
+Cooldown:
+    Enabled: false
+    Time: 3
 Velocity:
     Forward: 1.6
     #Allows you to set the forwards jump distance
