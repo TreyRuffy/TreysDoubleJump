@@ -17,6 +17,7 @@ permissions:
       tdj.particles: true
       tdj.command: true
       tdj.nofall: true
+      tdj.fly: true
   tdj.use:
     default: true
     description: Use the double jump feature.

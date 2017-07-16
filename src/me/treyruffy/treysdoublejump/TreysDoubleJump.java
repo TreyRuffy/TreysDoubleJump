@@ -38,76 +38,77 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
-	List<String> EnabledWorlds = getConfig().getStringList("EnabledWorlds");
-	List<String> DisabledPlayers = new ArrayList<String>();
-	List<String> Flying = new ArrayList<String>();
-	private HashMap<Player, Integer> cooldownTime;
-	private HashMap<Player, BukkitRunnable> cooldownTask;
 	
+	@Override
 	public void onEnable(){
 		getServer().getPluginManager().registerEvents(this, this);
-		getConfig().options().copyDefaults(true);
-		saveConfig();
+		new ConfigManager();
+		ConfigManager.reloadConfig();
 		cooldownTime = new HashMap<Player, Integer>();
 		cooldownTask = new HashMap<Player, BukkitRunnable>();
 		
 		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 		if ((version.equals("v1_7_R1")||version.equals("v1_7_R2")||version.equals("v1_7_R3")||version.equals("v1_7_R4")||version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){
-			String s = getConfig().getString("Sounds.Type");
+			String s = ConfigManager.getConfig().getString("Sounds.Type");
 			if (s.contains("BLOCK_")||s.contains("ENTITY_")){
 				String t = s.replace("BLOCK_", "").replace("ENTITY_", "");
-				getConfig().set("Sounds.Type", t);
-				saveConfig();
+				ConfigManager.getConfig().set("Sounds.Type", t);
+				ConfigManager.saveConfig();
 			}
 		}
 	}
 	
+	List<String> DisabledPlayers = new ArrayList<String>();
+	List<String> Flying = new ArrayList<String>();
+	private HashMap<Player, Integer> cooldownTime;
+	private HashMap<Player, BukkitRunnable> cooldownTask;
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if (sender instanceof Player){
-			if (EnabledWorlds.contains(((Player) sender).getWorld().getName())){
+			if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(((Player) sender).getWorld().getName())){
 				if (cmd.getName().equalsIgnoreCase("tdj")){
 					if (sender.hasPermission("tdj.command")){
 						if (DisabledPlayers.contains(((Player) sender).getUniqueId().toString())){
 							DisabledPlayers.remove(((Player) sender).getUniqueId().toString());
-							sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.ToggledOn")));
+							sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.ToggledOn")));
 							return true;
 						} else {
 							DisabledPlayers.add(((Player) sender).getUniqueId().toString());
-							sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.ToggledOff")));
+							sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.ToggledOff")));
 							((Player) sender).setFlying(false);
 							return true;
 						}
 					} else {
-						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.NoPermission")));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.NoPermission")));
 						return false;
 					}
 				} else if (cmd.getName().equalsIgnoreCase("fly")){
-					if (getConfig().getBoolean("Flight.Enabled")){
+					if (ConfigManager.getConfig().getBoolean("Flight.Enabled")){
 						if (sender instanceof Player){
 							if (sender.hasPermission("tdj.fly")){
 								if (Flying.contains(((Player) sender).getUniqueId().toString())){
 									Flying.remove(((Player) sender).getUniqueId().toString());
-									sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.FlyToggledOff")));
+									sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyToggledOff")));
 									return true;
 								} else {
 									Flying.add(((Player) sender).getUniqueId().toString());
-									sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.FlyToggledOn")));
+									sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyToggledOn")));
 									((Player) sender).setFlying(false);
 									return true;
 								}
 							} else {
-								sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.NoPermission")));
+								sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.NoPermission")));
 								return false;
 							}
 						}
 					} else {
-						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.FlyCommandDisabled")));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyCommandDisabled")));
 						return false;
 					}
 				}
 			}
 		} else {
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Messages.PlayersOnly")));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.PlayersOnly")));
 			return false;
 		}
 		return false;
@@ -119,7 +120,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			Player p = (Player) e.getEntity();
 			if (p.hasPermission("tdj.nofall")){
 				if (!DisabledPlayers.contains(p.getUniqueId().toString())){
-					if (EnabledWorlds.contains(p.getWorld().getName())){
+					if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
 						if (e.getCause().equals(DamageCause.FALL)){
 							e.setCancelled(true);
 						}
@@ -136,7 +137,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
 				if (!cooldownTime.containsKey(player)){
 					if ((player.getGameMode() != GameMode.CREATIVE) && (player.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-						  if (EnabledWorlds.contains(player.getWorld().getName())){
+						  if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(player.getWorld().getName())){
 							  if (player.hasPermission("tdj.use")){
 								  if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
 									  if (player.hasPermission("tdj.ncp")) {
@@ -180,13 +181,13 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		final Player player = event.getPlayer();
 		if (!Flying.contains(player.getUniqueId().toString())){
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
-				if ((player.getGameMode() != GameMode.CREATIVE) && ((player.hasPermission("tdj.use")) && (this.EnabledWorlds.contains(player.getWorld().getName())))){
+				if ((player.getGameMode() != GameMode.CREATIVE) && ((player.hasPermission("tdj.use")) && (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(player.getWorld().getName())))){
 					event.setCancelled(true);
 					player.setAllowFlight(false);
 					player.setFlying(false);
 					
-					if (getConfig().getBoolean("Cooldown.Enabled")){
-						cooldownTime.put(player, getConfig().getInt("Cooldown.Time"));
+					if (ConfigManager.getConfig().getBoolean("Cooldown.Enabled")){
+						cooldownTime.put(player, ConfigManager.getConfig().getInt("Cooldown.Time"));
 						cooldownTask.put(player, new BukkitRunnable() {
 							@Override
 							public void run() {
@@ -201,11 +202,11 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 						cooldownTask.get(player).runTaskTimer(this, 20, 20);
 					}
 					
-					player.setVelocity(player.getLocation().getDirection().multiply(getConfig().getDouble("Velocity.Forward")).setY(getConfig().getDouble("Velocity.Up")));
-					if ((player.hasPermission("tdj.sounds")) && (getConfig().getBoolean("Sounds.Enabled"))) {
-						player.playSound(player.getLocation(), Sound.valueOf(getConfig().getString("Sounds.Type")), getConfig().getInt("Sounds.Volume"), getConfig().getInt("Sounds.Pitch"));
+					player.setVelocity(player.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.Forward")).setY(ConfigManager.getConfig().getDouble("Velocity.Up")));
+					if ((player.hasPermission("tdj.sounds")) && (ConfigManager.getConfig().getBoolean("Sounds.Enabled"))) {
+						player.playSound(player.getLocation(), Sound.valueOf(ConfigManager.getConfig().getString("Sounds.Type")), ConfigManager.getConfig().getInt("Sounds.Volume"), ConfigManager.getConfig().getInt("Sounds.Pitch"));
 					} 
-			    	if ((player.hasPermission("tdj.particles")) && (getConfig().getBoolean("Particles.Enabled"))){
+			    	if ((player.hasPermission("tdj.particles")) && (ConfigManager.getConfig().getBoolean("Particles.Enabled"))){
 			    		ParticlesMain particles = null;
 			    		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 			    		if (version.equals("v1_7_R1")){
@@ -233,12 +234,12 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			    		} else if (version.equals("v1_12_R1")){
 			    			particles = new Particle_1_12_R1();
 			    		}
-			    		if (getConfig().getBoolean("Particles.AllPlayers")){
+			    		if (ConfigManager.getConfig().getBoolean("Particles.AllPlayers")){
 							for (Player players : Bukkit.getOnlinePlayers()){
-								particles.sendParticle(players, getConfig().getString("Particles.Type"), player.getLocation(), getConfig().getInt("Particles.Amount"), getConfig().getInt("Particles.R"), getConfig().getInt("Particles.G"), getConfig().getInt("Particles.B"));
+								particles.sendParticle(players, ConfigManager.getConfig().getString("Particles.Type"), player.getLocation(), ConfigManager.getConfig().getInt("Particles.Amount"), ConfigManager.getConfig().getInt("Particles.R"), ConfigManager.getConfig().getInt("Particles.G"), ConfigManager.getConfig().getInt("Particles.B"));
 							}
 						} else {
-							particles.sendParticle(player, getConfig().getString("Particles.Type"), player.getLocation(), getConfig().getInt("Particles.Amount"), getConfig().getInt("Particles.R"), getConfig().getInt("Particles.G"), getConfig().getInt("Particles.B"));
+							particles.sendParticle(player, ConfigManager.getConfig().getString("Particles.Type"), player.getLocation(), ConfigManager.getConfig().getInt("Particles.Amount"), ConfigManager.getConfig().getInt("Particles.R"), ConfigManager.getConfig().getInt("Particles.G"), ConfigManager.getConfig().getInt("Particles.B"));
 						}
 			    		player.setFallDistance(-256);
 			      }
