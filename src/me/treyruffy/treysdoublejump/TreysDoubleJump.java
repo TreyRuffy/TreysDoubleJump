@@ -15,6 +15,7 @@ import me.treyruffy.treysdoublejump.NMS.v1_8_R2.Particle_1_8_R2;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R3.Particle_1_8_R3;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R1.Particle_1_9_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R2.Particle_1_9_R2;
+import me.treyruffy.treysdoublejump.Updater.Updates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable(){
 		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new Updates(), this);
 		new ConfigManager();
 		ConfigManager.reloadConfig();
 		cooldownTime = new HashMap<Player, Integer>();
@@ -56,6 +58,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 				ConfigManager.saveConfig();
 			}
 		}
+		Updates.updateCheck();
 	}
 	
 	List<String> DisabledPlayers = new ArrayList<String>();
