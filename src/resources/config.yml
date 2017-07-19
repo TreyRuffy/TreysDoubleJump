@@ -16,6 +16,11 @@
 # |             tdj.particles  - Allows you to summon particles whilst double jumping |
 # +-----------------------------------------------------------------------------------+
 # ------------------------------------------------------------------------------------- #
+Updates:
+    # Should we check for updates?
+    Check: true
+    # Should we tell players with tdj.updates there is an update on join?
+    TellPlayers: true
 Messages:
     ToggledOff: '&6You have &c&ldisabled &6your double jump!'
     #Disabled message

@@ -18,6 +18,7 @@ permissions:
       tdj.command: true
       tdj.nofall: true
       tdj.fly: true
+      tdj.updates: true
   tdj.use:
     default: true
     description: Use the double jump feature.
@@ -39,10 +40,13 @@ permissions:
   tdj.fly:
     default: op
     description: Allows you to fly!
+  tdj.updates:
+    default: op
+    description: Tells these players there is an update for TDJ
 commands:
   tdj:
     description: Allows you to toggle double jumping.
-    aliases: [dj,doublejump,treysdoublejump]
+    aliases: [dj, doublejump, treysdoublejump]
   fly:
     description: Allows you to fly!
-    aliases: [flight,togglefly,toggleflight]
+    aliases: [flight, togglefly, toggleflight]
