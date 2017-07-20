@@ -39,6 +39,9 @@ Messages:
 Flight:
     Enabled: true
     #Allows you to enable /fly
+NoFall:
+    Enabled: true
+    # Do you want to have no fall damage for everyone with tdj.nofall?
 Cooldown:
     Enabled: false
     Time: 3

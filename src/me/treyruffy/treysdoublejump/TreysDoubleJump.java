@@ -119,16 +119,15 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void noFall(EntityDamageEvent e){
-		if (e.getEntity() instanceof Player){
-			Player p = (Player) e.getEntity();
-			if (p.hasPermission("-tdj.nofall") || (!(p.hasPermission("tdj.nofall")))){
-				return;
-			}
-			if (p.hasPermission("tdj.nofall")){
-				if (!DisabledPlayers.contains(p.getUniqueId().toString())){
-					if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
-						if (e.getCause().equals(DamageCause.FALL)){
-							e.setCancelled(true);
+		if (ConfigManager.getConfig().getBoolean("NoFall.Enabled")){
+			if (e.getEntity() instanceof Player){
+				Player p = (Player) e.getEntity();
+				if (p.hasPermission("tdj.nofall")){
+					if (!DisabledPlayers.contains(p.getUniqueId().toString())){
+						if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
+							if (e.getCause().equals(DamageCause.FALL)){
+								e.setCancelled(true);
+							}
 						}
 					}
 				}
