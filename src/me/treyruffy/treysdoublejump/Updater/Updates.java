@@ -47,17 +47,20 @@ public class Updates implements Listener {
 			if (ConfigManager.getConfig().getBoolean("Updates.TellPlayers")){
 				final Player p = e.getPlayer();
 				if (p.hasPermission("tdj.updates")){
-					Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
-						@Override
-						public void run() {
-							p.sendMessage(ChatColor.AQUA + "+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+");
-							p.sendMessage(ChatColor.GREEN + "There is a new update for");
-							p.sendMessage(ChatColor.GREEN + "Trey's Double Jump");
-							p.sendMessage(ChatColor.RED + "Download at:");
-							p.sendMessage(ChatColor.LIGHT_PURPLE + "https://www.spigotmc.org/resources/19630/");
-							p.sendMessage(ChatColor.AQUA + "+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+");
-						}
-					}, 4);
+					Object[] updates = UpdateChecker.getLastUpdate();
+					if (updates.length == 2){
+						Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
+							@Override
+							public void run() {
+								p.sendMessage(ChatColor.AQUA + "+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+");
+								p.sendMessage(ChatColor.GREEN + "There is a new update for");
+								p.sendMessage(ChatColor.GREEN + "Trey's Double Jump");
+								p.sendMessage(ChatColor.RED + "Download at:");
+								p.sendMessage(ChatColor.LIGHT_PURPLE + "https://www.spigotmc.org/resources/19630/");
+								p.sendMessage(ChatColor.AQUA + "+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+");
+							}
+						}, 4);
+					}
 				}
 			}
 		}
