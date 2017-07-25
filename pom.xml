@@ -7,7 +7,7 @@
   
   <groupId>me.treyruffy.treysdoublejump</groupId>
   <artifactId>TreysDoubleJump</artifactId>
-  <version>1.1.7</version>
+  <version>1.1.8</version>
   <name>TreysDoubleJump</name>
   <description>Allows you to double jump!</description>
   <url>https://www.spigotmc.org/resources/19630/</url>
@@ -55,6 +55,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>2.0.8</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.5</version>
@@ -65,6 +71,10 @@
     <repository>
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
   </repositories>
   

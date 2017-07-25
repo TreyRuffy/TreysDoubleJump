@@ -45,6 +45,9 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new Updates(), this);
 		new ConfigManager();
+		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
+			new PAPI(this).hook();
+		}
 		ConfigManager.reloadConfig();
 		cooldownTime = new HashMap<Player, Integer>();
 		cooldownTask = new HashMap<Player, BukkitRunnable>();
@@ -251,5 +254,9 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 				}
 			}
 		}
+	}
+	
+	public Integer getCooldown(Player p){
+		return cooldownTime.get(p);
 	}
 }

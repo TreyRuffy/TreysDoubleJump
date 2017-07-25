@@ -5,7 +5,7 @@ author: TreyRuffy
 description: ${project.description}
 website: ${project.url}
 prefix: Trey's Double Jump
-softdepend: [NoCheatPlus]
+softdepend: [NoCheatPlus, PlaceholderAPI]
 permissions:
   tdj.*:
     default: op
