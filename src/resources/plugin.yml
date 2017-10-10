@@ -50,3 +50,6 @@ commands:
   fly:
     description: Allows you to fly!
     aliases: [flight, togglefly, toggleflight]
+  djreload:
+    description: Allows you to reload the configs
+    aliases: [doublejumpreload]

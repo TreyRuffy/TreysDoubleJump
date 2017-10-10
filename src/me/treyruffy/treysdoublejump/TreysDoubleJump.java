@@ -86,7 +86,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 						}
 					} else {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.NoPermission")));
-						return false;
+						return true;
 					}
 				} else if (cmd.getName().equalsIgnoreCase("fly")){
 					if (ConfigManager.getConfig().getBoolean("Flight.Enabled")){
@@ -104,20 +104,38 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 								}
 							} else {
 								sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.NoPermission")));
-								return false;
+								return true;
 							}
 						}
 					} else {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyCommandDisabled")));
-						return false;
+						return true;
+					}
+				} else if (cmd.getName().equalsIgnoreCase("djreload")){
+					if (sender.hasPermission("tdj.reload")){
+						sender.sendMessage(ChatColor.BLUE + "-=====[" + ChatColor.AQUA + ChatColor.BOLD + " TDJ " + ChatColor.BLUE + "]=====-");
+						sender.sendMessage(ChatColor.GREEN + "Reloading the double jump YAML files...");
+						try {
+							ConfigManager.reloadConfig();
+							sender.sendMessage(ChatColor.GREEN + "Reloaded the double jump YAML files successfully!");
+							sender.sendMessage(ChatColor.BLUE + "-======================-");
+						} catch (Exception e){
+							sender.sendMessage(ChatColor.RED + "Could not reload the double jump YAML files.");
+							sender.sendMessage(ChatColor.BLUE + "-======================-");
+							e.printStackTrace();
+						}
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyCommandDisabled")));
+						return true;
 					}
 				}
 			}
 		} else {
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.PlayersOnly")));
-			return false;
+			return true;
 		}
-		return false;
+		return true;
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -144,7 +162,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		if (!Flying.contains(player.getUniqueId().toString())){
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
 				if (!cooldownTime.containsKey(player)){
-					if ((player.getGameMode() != GameMode.CREATIVE) && (player.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
+					if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) return;
+					if ((player.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
 						  if (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(player.getWorld().getName())){
 							  if (player.hasPermission("tdj.use")){
 								  if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
@@ -189,7 +208,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		final Player player = event.getPlayer();
 		if (!Flying.contains(player.getUniqueId().toString())){
 			if (!DisabledPlayers.contains(player.getUniqueId().toString())){
-				if ((player.getGameMode() != GameMode.CREATIVE) && ((player.hasPermission("tdj.use")) && (ConfigManager.getConfig().getStringList("EnabledWorlds").contains(player.getWorld().getName())))){
+				if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) return;
+				if (player.hasPermission("tdj.use") && ConfigManager.getConfig().getStringList("EnabledWorlds").contains(player.getWorld().getName())){
 					event.setCancelled(true);
 					player.setAllowFlight(false);
 					player.setFlying(false);
