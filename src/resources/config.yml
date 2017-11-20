@@ -36,6 +36,8 @@ Messages:
     #No permissions for the command.
     FlyCommandDisabled: '&dThe fly command is disabled'
     #If Flight is disabled below, you will receive this message
+    NotInWorld: '&cYou cannot do that in this world.'
+    #If the player is not in one of the listed worlds below and tried to execute a command.
 Flight:
     Enabled: true
     #Allows you to enable /fly
@@ -75,6 +77,9 @@ Particles:
     #Green value. (Leave as 0 if you are not using REDSTONE particles)
     B: 0
     #Blue value. (Leave as 0 if you are not using REDSTONE particles)
+GroundPound:
+    Enabled: true
+    #Do you want players to be able to ground pound with tdj.groundpound
 EnabledWorlds:
     - world
     - world_the_end

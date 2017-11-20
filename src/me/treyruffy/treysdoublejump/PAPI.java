@@ -16,7 +16,7 @@ public class PAPI extends EZPlaceholderHook {
 	@Override
 	public String onPlaceholderRequest(Player p, String identifier) {
 		if (identifier.equalsIgnoreCase("cooldown")){
-			if (plugin.getCooldown(p) == null || plugin.getCooldown(p).equals("0")){
+			if (plugin.getCooldown(p) == null || plugin.getCooldown(p) == 0){
 				return String.valueOf("0");
 			}			
 			return String.valueOf(plugin.getCooldown(p));

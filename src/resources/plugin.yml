@@ -19,6 +19,7 @@ permissions:
       tdj.nofall: true
       tdj.fly: true
       tdj.updates: true
+      tdj.groundpound: true
   tdj.use:
     default: true
     description: Use the double jump feature.
@@ -43,6 +44,9 @@ permissions:
   tdj.updates:
     default: op
     description: Tells these players there is an update for TDJ
+  tdj.groundpound:
+    default: true
+    description: Allows players to ground pound
 commands:
   tdj:
     description: Allows you to toggle double jumping.
