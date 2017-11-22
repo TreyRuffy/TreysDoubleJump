@@ -26,10 +26,14 @@ Messages:
     #Disabled message
     FlyToggledOff: '&6You have &c&ldisabled&6 your flight!'
     #Disabled message for fly
+    GroundPoundToggledOff: '&6You have &c&ldisabled&6 your ground pound!'
+    #Disabled message for ground pound
     ToggledOn: '&6You have &a&lenabled &6your double jump!'
     #Enabled message
     FlyToggledOn: '&6You have &a&lenabled&6 your flight!'
     #Enabled message for fly
+    GroundPoundToggledOn: '&6You have &a&lenabled&6 your ground pound!'
+    #Enabled message for ground pound
     PlayersOnly: '&cYou must be a player to execute this command.'
     #Saying only players can execute the command
     NoPermission: '&cYou do not have permission to execute this command.'

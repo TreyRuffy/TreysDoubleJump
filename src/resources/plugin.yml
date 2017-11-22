@@ -20,6 +20,7 @@ permissions:
       tdj.fly: true
       tdj.updates: true
       tdj.groundpound: true
+      tdj.groundpoundcommand: true
   tdj.use:
     default: true
     description: Use the double jump feature.
@@ -47,6 +48,9 @@ permissions:
   tdj.groundpound:
     default: true
     description: Allows players to ground pound
+  tdj.groundpoundcommand:
+    default: true
+    description: Allows players to toggle their ground pounding
 commands:
   tdj:
     description: Allows you to toggle double jumping.
@@ -54,6 +58,9 @@ commands:
   fly:
     description: Allows you to fly!
     aliases: [flight, togglefly, toggleflight]
+  groundpound:
+    description: Allows you to toggle ground pounding
+    aliases: [togglegroundpound]
   djreload:
     description: Allows you to reload the configs
     aliases: [doublejumpreload]

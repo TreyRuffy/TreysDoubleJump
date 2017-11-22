@@ -32,12 +32,12 @@ import me.treyruffy.treysdoublejump.NMS.v1_9_R2.Particle_1_9_R2;
 
 public class DoubleJump implements Listener {
 
-	private HashMap<Player, Integer> cooldown = new HashMap<Player, Integer>();
+	private static HashMap<Player, Integer> cooldown = new HashMap<Player, Integer>();
 	private HashMap<Player, BukkitRunnable> cooldownTask= new HashMap<Player, BukkitRunnable>();
 	ArrayList<String> NCPPlayer = new ArrayList<String>();
 	public static ArrayList<String> Grounded = new ArrayList<String>();
 	
-	public Integer getCooldown(Player p){
+	public static Integer getCooldown(Player p){
 		return cooldown.get(p);
 	}
 	
@@ -139,7 +139,9 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		
-		Grounded.add(p.getUniqueId().toString());
+		if (!GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
+			Grounded.add(p.getUniqueId().toString());
+		}
 		
 		e.setCancelled(true);
 		p.setAllowFlight(false);
@@ -228,6 +230,9 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		if (!ConfigManager.getConfig().getBoolean("GroundPound.Enabled")){
+			return;
+		}
+		if (GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
 			return;
 		}
 		p.setVelocity(new Vector(0, -5, 0));

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.treyruffy.treysdoublejump.Events.DoubleJump;
 import me.treyruffy.treysdoublejump.Events.DoubleJumpCommand;
 import me.treyruffy.treysdoublejump.Events.FlightCommand;
+import me.treyruffy.treysdoublejump.Events.GroundPoundCommand;
 import me.treyruffy.treysdoublejump.Events.NoFallDamage;
 import me.treyruffy.treysdoublejump.Updater.Updates;
 
@@ -26,6 +27,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		getCommand("fly").setExecutor(new FlightCommand());
 		getCommand("tdj").setExecutor(new DoubleJumpCommand());
 		getCommand("djreload").setExecutor(new DoubleJumpCommand());
+		getCommand("groundpound").setExecutor(new GroundPoundCommand());
 		
 		new ConfigManager();
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
@@ -47,8 +49,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		Updates.updateCheck();
 	}  
 	
-	public Integer getCooldown(Player p){
-		return new DoubleJump().getCooldown(p);
+	public static Integer getCooldown(Player p){
+		return DoubleJump.getCooldown(p);
 	}
 	
 }
