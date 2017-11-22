@@ -52,4 +52,16 @@ public class DoubleJump {
 		}
 	}
 	
+	public static void setGroundPound(Player player, Boolean b) {
+		if (!b) {
+			if (!GroundPoundCommand.groundPoundDisabled.contains(player.getUniqueId().toString())) {
+				GroundPoundCommand.groundPoundDisabled.add(player.getUniqueId().toString());
+			}
+		} else {
+			if (GroundPoundCommand.groundPoundDisabled.contains(player.getUniqueId().toString())) {
+				GroundPoundCommand.groundPoundDisabled.remove(player.getUniqueId().toString());
+			}
+		}
+		return;
+	}
 }
