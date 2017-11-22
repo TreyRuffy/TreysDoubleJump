@@ -14,6 +14,7 @@ import me.treyruffy.treysdoublejump.Updater.Updates;
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
 	
+	
 	@Override
 	public void onEnable(){
 		PluginManager pm = Bukkit.getPluginManager();
@@ -31,9 +32,11 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			new PAPI(this).hook();
 		}
 		ConfigManager.reloadConfig();
+		new Metrics(this);
+		
 		
 		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-		if ((version.equals("v1_7_R1")||version.equals("v1_7_R2")||version.equals("v1_7_R3")||version.equals("v1_7_R4")||version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){
+		if ((version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){
 			String s = ConfigManager.getConfig().getString("Sounds.Type");
 			if (s.contains("BLOCK_")||s.contains("ENTITY_")){
 				String t = s.replace("BLOCK_", "").replace("ENTITY_", "");
@@ -41,13 +44,11 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 				ConfigManager.saveConfig();
 			}
 		}
-		if (!version.equals("v1_7_R1")||version.equals("v1_7_R2")||version.equals("v1_7_R3")||version.equals("v1_7_R4")) {
-			return;
-		}
 		Updates.updateCheck();
 	}  
 	
 	public Integer getCooldown(Player p){
 		return new DoubleJump().getCooldown(p);
 	}
+	
 }

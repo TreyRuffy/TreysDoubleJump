@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,10 +29,17 @@ public class DoubleJumpCommand implements CommandExecutor {
 					if (DisablePlayers.contains(p.getUniqueId().toString())) {
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.ToggledOn")));
 						DisablePlayers.remove(p.getUniqueId().toString());
+						if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+							return true;
+						}
+						p.setAllowFlight(true);
 						return true;
 					} else {
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.ToggledOff")));
 						DisablePlayers.add(p.getUniqueId().toString());
+						if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+							return true;
+						}
 						p.setFlying(false);
 						p.setAllowFlight(false);
 						return true;

@@ -18,20 +18,13 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/NoCheatPlus.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.7.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.7.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.7.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.8.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.8.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.9.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.9.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.10.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.11.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.12-pre5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.12-pre6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Treyr/Desktop/Plugin Creator Files/Dependencies/craftbukkit/craftbukkit-1.12.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

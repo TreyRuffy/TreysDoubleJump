@@ -41,6 +41,7 @@ public class Updates implements Listener {
 		}
 	}
 	
+	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
 		if (ConfigManager.getConfig().getBoolean("Updates.Check")){

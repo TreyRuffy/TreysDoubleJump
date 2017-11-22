@@ -24,10 +24,6 @@ import me.treyruffy.treysdoublejump.Interfaces.ParticlesMain;
 import me.treyruffy.treysdoublejump.NMS.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_12_R1.Particle_1_12_R1;
-import me.treyruffy.treysdoublejump.NMS.v1_7_R1.Particle_1_7_R1;
-import me.treyruffy.treysdoublejump.NMS.v1_7_R2.Particle_1_7_R2;
-import me.treyruffy.treysdoublejump.NMS.v1_7_R3.Particle_1_7_R3;
-import me.treyruffy.treysdoublejump.NMS.v1_7_R4.Particle_1_7_R4;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R1.Particle_1_8_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R2.Particle_1_8_R2;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R3.Particle_1_8_R3;
@@ -39,7 +35,7 @@ public class DoubleJump implements Listener {
 	private HashMap<Player, Integer> cooldown = new HashMap<Player, Integer>();
 	private HashMap<Player, BukkitRunnable> cooldownTask= new HashMap<Player, BukkitRunnable>();
 	ArrayList<String> NCPPlayer = new ArrayList<String>();
-	ArrayList<String> Grounded = new ArrayList<String>();
+	public static ArrayList<String> Grounded = new ArrayList<String>();
 	
 	public Integer getCooldown(Player p){
 		return cooldown.get(p);
@@ -65,7 +61,10 @@ public class DoubleJump implements Listener {
 		if (!p.hasPermission("tdj.use")) {
 			return;
 		}
-		if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+		if (p.getGameMode() == GameMode.SPECTATOR) {
+			return;
+		}
+		if (p.getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
@@ -124,7 +123,10 @@ public class DoubleJump implements Listener {
 		if (cooldown.containsKey(p)) {
 			return;
 		}
-		if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+		if (p.getGameMode() == GameMode.SPECTATOR) {
+			return;
+		}
+		if (p.getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 		if (!p.hasPermission("tdj.use")) {
@@ -167,17 +169,9 @@ public class DoubleJump implements Listener {
 		} 
 		
     	if ((p.hasPermission("tdj.particles")) && (ConfigManager.getConfig().getBoolean("Particles.Enabled"))){
-    		ParticlesMain particles = null;
     		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-    		if (version.equals("v1_7_R1")){
-    			particles = new Particle_1_7_R1();
-    		} else if (version.equals("v1_7_R2")){
-    			particles = new Particle_1_7_R2();
-    		} else if (version.equals("v1_7_R3")){
-    			particles = new Particle_1_7_R3();
-    		} else if (version.equals("v1_7_R4")){
-    			particles = new Particle_1_7_R4();
-    		} else if (version.equals("v1_8_R1")){
+    		ParticlesMain particles = null;
+    		if (version.equals("v1_8_R1")){
     			particles = new Particle_1_8_R1();
     		} else if (version.equals("v1_8_R2")){
     			particles = new Particle_1_8_R2();
@@ -209,7 +203,10 @@ public class DoubleJump implements Listener {
 	@EventHandler
 	public void onSneak(PlayerToggleSneakEvent e) {
 		Player p = e.getPlayer();
-		if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+		if (p.getGameMode() == GameMode.SPECTATOR) {
+			return;
+		}
+		if (p.getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 		if (!p.hasPermission("tdj.use")) {
@@ -222,6 +219,9 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		if (p.isOnGround()) {
+			return;
+		}
+		if (FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
 		if (DoubleJumpCommand.DisablePlayers.contains(p.getUniqueId().toString())) {

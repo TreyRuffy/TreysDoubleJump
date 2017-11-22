@@ -31,6 +31,9 @@ public class FlightCommand implements CommandExecutor {
 							return true;
 						} else {
 							p.setFallDistance(0f);
+							if (DoubleJump.Grounded.contains(p.getUniqueId().toString())) {
+								DoubleJump.Grounded.remove(p.getUniqueId().toString());
+							}
 							p.setAllowFlight(true);
 							p.setFlying(true);
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.FlyToggledOn")));
