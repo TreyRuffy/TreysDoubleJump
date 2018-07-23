@@ -8,8 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import me.treyruffy.treysdoublejump.ConfigManager;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
 public class Updates implements Listener {
 

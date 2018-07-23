@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-import me.treyruffy.treysdoublejump.ConfigManager;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
 public class NoFallDamage implements Listener {
 

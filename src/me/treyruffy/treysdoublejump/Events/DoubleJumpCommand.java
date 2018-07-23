@@ -10,7 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.treyruffy.treysdoublejump.ConfigManager;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
 public class DoubleJumpCommand implements CommandExecutor {
 
@@ -40,8 +40,10 @@ public class DoubleJumpCommand implements CommandExecutor {
 						if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
 							return true;
 						}
-						p.setFlying(false);
-						p.setAllowFlight(false);
+						if (!FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
+							p.setFlying(false);
+							p.setAllowFlight(false);
+						}
 						return true;
 					}
 				} else {

@@ -12,6 +12,10 @@ import me.treyruffy.treysdoublejump.Events.FlightCommand;
 import me.treyruffy.treysdoublejump.Events.GroundPoundCommand;
 import me.treyruffy.treysdoublejump.Events.NoFallDamage;
 import me.treyruffy.treysdoublejump.Updater.Updates;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
+import me.treyruffy.treysdoublejump.Util.MVdWPAPI;
+import me.treyruffy.treysdoublejump.Util.Metrics;
+import me.treyruffy.treysdoublejump.Util.PAPI;
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
 	
@@ -32,6 +36,9 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		new ConfigManager();
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
 			new PAPI(this).hook();
+		}
+		if (Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
+			MVdWPAPI.register(this);
 		}
 		ConfigManager.reloadConfig();
 		new Metrics(this);

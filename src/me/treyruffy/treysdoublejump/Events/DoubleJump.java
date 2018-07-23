@@ -18,22 +18,23 @@ import org.bukkit.util.Vector;
 
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import me.treyruffy.treysdoublejump.ConfigManager;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.Interfaces.ParticlesMain;
 import me.treyruffy.treysdoublejump.NMS.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_12_R1.Particle_1_12_R1;
+import me.treyruffy.treysdoublejump.NMS.v1_13_R1.Particle_1_13_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R1.Particle_1_8_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R2.Particle_1_8_R2;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R3.Particle_1_8_R3;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R1.Particle_1_9_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R2.Particle_1_9_R2;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
 public class DoubleJump implements Listener {
 
 	private static HashMap<Player, Integer> cooldown = new HashMap<Player, Integer>();
-	private HashMap<Player, BukkitRunnable> cooldownTask= new HashMap<Player, BukkitRunnable>();
+	HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
 	ArrayList<String> NCPPlayer = new ArrayList<String>();
 	public static ArrayList<String> Grounded = new ArrayList<String>();
 	
@@ -189,6 +190,8 @@ public class DoubleJump implements Listener {
     			particles = new Particle_1_11_R1();
     		} else if (version.equals("v1_12_R1")){
     			particles = new Particle_1_12_R1();
+    		} else if (version.equals("v1_13_R1")) {
+    			particles = new Particle_1_13_R1();
     		}
     		if (ConfigManager.getConfig().getBoolean("Particles.AllPlayers")){
 				for (Player players : Bukkit.getOnlinePlayers()){

@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.treyruffy.treysdoublejump.ConfigManager;
+import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
 public class FlightCommand implements CommandExecutor {
 
