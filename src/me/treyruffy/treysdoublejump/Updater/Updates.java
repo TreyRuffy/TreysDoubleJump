@@ -11,8 +11,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class Updates implements Listener {
 
+	// Sends a console message if an update is available 
 	public static void updateCheck(){
 		if (ConfigManager.getConfig().getBoolean("Updates.Check")){
 			UpdateChecker.getLastUpdate();
@@ -41,7 +46,7 @@ public class Updates implements Listener {
 		}
 	}
 	
-	
+	// Sends the player with permissions a message if an update is available  
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
 		if (ConfigManager.getConfig().getBoolean("Updates.Check")){

@@ -5,8 +5,13 @@ import org.bukkit.entity.Player;
 import me.treyruffy.treysdoublejump.Events.DoubleJumpCommand;
 import me.treyruffy.treysdoublejump.Events.GroundPoundCommand;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class DoubleJump {
 
+	// Accesses the cooldown timer for the player
 	public static Integer getDoubleJumpTime(Player player) {
 		if (me.treyruffy.treysdoublejump.Events.DoubleJump.getCooldown(player) == null || me.treyruffy.treysdoublejump.Events.DoubleJump.getCooldown(player) == 0){
 			return 0;
@@ -15,6 +20,7 @@ public class DoubleJump {
 		}
 	}
 	
+	// Accesses whether the player can double jump or not
 	public static Boolean isDoubleJumpEnabled(Player player) {
 		if (DoubleJumpCommand.DisablePlayers.contains(player.getUniqueId().toString())) {
 			return false;
@@ -23,6 +29,7 @@ public class DoubleJump {
 		}
 	}
 	
+	// Sets whether the player can double jump or not
 	public static void setDoubleJump(Player player, Boolean b) {
 		if (b) {
 			if (!DoubleJumpCommand.DisablePlayers.contains(player.getUniqueId().toString())) {
@@ -36,6 +43,7 @@ public class DoubleJump {
 		return;
 	}
 	
+	// Accesses whether the player has access to ground pound
 	public static Boolean isGroundPoundEnabled(Player player) {
 		if (GroundPoundCommand.groundPoundDisabled.contains(player.getUniqueId().toString())) {
 			return false;
@@ -44,6 +52,7 @@ public class DoubleJump {
 		}
 	}
 	
+	// Accesses whether the player can use ground pound now
 	public static Boolean canUseGroundPound(Player player) {
 		if (me.treyruffy.treysdoublejump.Events.DoubleJump.Grounded.contains(player.getUniqueId().toString())) {
 			return true;
@@ -52,6 +61,7 @@ public class DoubleJump {
 		}
 	}
 	
+	// Sets whether the player can or cannot use ground pound
 	public static void setGroundPound(Player player, Boolean b) {
 		if (!b) {
 			if (!GroundPoundCommand.groundPoundDisabled.contains(player.getUniqueId().toString())) {

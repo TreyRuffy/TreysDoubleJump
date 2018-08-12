@@ -9,8 +9,13 @@ import org.bukkit.entity.Player;
 import me.treyruffy.treysdoublejump.Interfaces.ParticlesMain;
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class Particle_1_13_R1 implements ParticlesMain {
 
+	// Sets particles using packets for 1.13
 	@Override
 	public void sendParticle(Player p, String particle, Location loc, int amount, int r, int g, int b) {
 		if (ConfigManager.getConfig().getBoolean("Particles.AllPlayers")) {

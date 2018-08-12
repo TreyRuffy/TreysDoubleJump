@@ -11,10 +11,16 @@ import org.bukkit.entity.Player;
 
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class FlightCommand implements CommandExecutor {
 
+	// Players in this list can fly
 	public static List<String> FlyingPlayers = new ArrayList<String>();
 	
+	// Sets all commands for /fly
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("fly")) {

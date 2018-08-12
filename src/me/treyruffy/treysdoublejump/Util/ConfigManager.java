@@ -13,13 +13,22 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class ConfigManager {
 
+	// Accesses the main class
 	private static TreysDoubleJump plugin = TreysDoubleJump.getPlugin(TreysDoubleJump.class);
 	
+	// Accesses the configuration
 	public static FileConfiguration MainConfig;
+	
+	// Accesses the configuration file
 	public static File MainConfigFile;
 	
+	// Sets up the config
 	public void setup(){
 		if(!plugin.getDataFolder().exists()){
 			plugin.getDataFolder().mkdir();
@@ -38,6 +47,7 @@ public class ConfigManager {
 		MainConfig = YamlConfiguration.loadConfiguration(MainConfigFile);
 	}
 	
+	// Gets the config
 	public static FileConfiguration getConfig(){
 		if (MainConfig == null){
 			reloadConfig();
@@ -45,6 +55,7 @@ public class ConfigManager {
 		return MainConfig; 
 	}
 	
+	// Saves the config
 	public static void saveConfig(){
 		if (MainConfig == null){
 			throw new NullArgumentException("Cannot save a non-existant file!");
@@ -56,6 +67,7 @@ public class ConfigManager {
 		}
 	}
 	
+	// Reloads the config
 	public static void reloadConfig(){
 		MainConfigFile = new File(plugin.getDataFolder(), "config.yml");
 		if (!MainConfigFile.exists()){

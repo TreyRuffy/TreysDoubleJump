@@ -5,7 +5,9 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,17 +33,31 @@ import me.treyruffy.treysdoublejump.NMS.v1_9_R1.Particle_1_9_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_9_R2.Particle_1_9_R2;
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class DoubleJump implements Listener {
 
+	// Cooldown timer for each player stored in a hashmap
 	private static HashMap<Player, Integer> cooldown = new HashMap<Player, Integer>();
+	
+	// The physical cooldown timer is stored as a hashmap
 	HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
+	
+	// Adds if the player is exempt from NCP, if it is enabled
 	ArrayList<String> NCPPlayer = new ArrayList<String>();
+	
+	// Adds if the player can groundpound
 	public static ArrayList<String> Grounded = new ArrayList<String>();
 	
+	
+	// Grabs the cooldown from config
 	public static Integer getCooldown(Player p){
 		return cooldown.get(p);
 	}
 	
+	// Removes the exemption from NCP if the player leaves
 	@EventHandler
 	public void onLeave(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
@@ -53,6 +69,7 @@ public class DoubleJump implements Listener {
 		}
 	}
 	
+	// Always checks whether the player can double jump again, and if so, it adds flight to the player
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		final Player p = e.getPlayer();
@@ -73,6 +90,23 @@ public class DoubleJump implements Listener {
 		}
 		if (!p.isOnGround()) {
 			return;
+		}
+		if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
+			return;
+		}
+		if (!ConfigManager.getConfig().getStringList("DisabledBlocks").isEmpty()) {
+			for (String blocks : ConfigManager.getConfig().getStringList("DisabledBlocks")) {
+				try {
+					if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.valueOf(blocks.toUpperCase())) {
+						if (Grounded.contains(p.getUniqueId().toString())) {
+							Grounded.remove(p.getUniqueId().toString());
+						}
+						return;
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
 		}
 		if (cooldown.containsKey(p)) {
 			return;
@@ -115,6 +149,7 @@ public class DoubleJump implements Listener {
 		p.setAllowFlight(true);
 	}
 	
+	// Checks if the player requested flight, without having access to it, so it can remove flight and set the player's velocity, particles, etc
 	@EventHandler
 	public void onPlayerToggleFlight(PlayerToggleFlightEvent e) {
 		final Player p = e.getPlayer();
@@ -165,7 +200,11 @@ public class DoubleJump implements Listener {
 			cooldownTask.get(p).runTaskTimer(TreysDoubleJump.getPlugin(TreysDoubleJump.class), 20, 20);
 		}
 		
-		p.setVelocity(p.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.Forward")).setY(ConfigManager.getConfig().getDouble("Velocity.Up")));
+		if (p.isSprinting()) {
+			p.setVelocity(p.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.SprintingForward")).setY(ConfigManager.getConfig().getDouble("Velocity.SprintingUp")));
+		} else {
+			p.setVelocity(p.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.Forward")).setY(ConfigManager.getConfig().getDouble("Velocity.Up")));
+		}
 		
 		if ((p.hasPermission("tdj.sounds")) && (ConfigManager.getConfig().getBoolean("Sounds.Enabled"))) {
 			p.playSound(p.getLocation(), Sound.valueOf(ConfigManager.getConfig().getString("Sounds.Type")), ConfigManager.getConfig().getInt("Sounds.Volume"), ConfigManager.getConfig().getInt("Sounds.Pitch"));
@@ -205,6 +244,7 @@ public class DoubleJump implements Listener {
 		return;
 	}
 	
+	// Checks whether the player tries to sneak while double jumping, if they have permission to
 	@EventHandler
 	public void onSneak(PlayerToggleSneakEvent e) {
 		Player p = e.getPlayer();

@@ -10,10 +10,16 @@ import org.bukkit.entity.Player;
 
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class GroundPoundCommand implements CommandExecutor {
 
+	// Players in this list cannot ground pound
 	public static ArrayList<String> groundPoundDisabled = new ArrayList<String>();
 	
+	// Sets all the /groundpound commands
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("groundpound")) {

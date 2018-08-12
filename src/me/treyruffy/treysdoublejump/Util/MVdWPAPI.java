@@ -9,8 +9,13 @@ import be.maximvdw.placeholderapi.PlaceholderReplacer;
 import me.treyruffy.treysdoublejump.API.DoubleJump;
 import me.treyruffy.treysdoublejump.API.Flight;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class MVdWPAPI {
 
+	// Registers the MVdW placeholders
 	public static void register(Plugin plugin) {
 		PlaceholderAPI.registerPlaceholder(plugin, "tdj_cooldown", new PlaceholderReplacer() {
 			

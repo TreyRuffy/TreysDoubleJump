@@ -4,6 +4,10 @@ import org.bukkit.entity.Player;
 
 import me.treyruffy.treysdoublejump.Events.FlightCommand;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class Flight {
 
 	public static Boolean isFlightEnabled(Player player) {

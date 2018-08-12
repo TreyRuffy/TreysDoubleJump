@@ -7,12 +7,18 @@ import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.API.DoubleJump;
 import me.treyruffy.treysdoublejump.API.Flight;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class PAPI extends EZPlaceholderHook {
 
+	// Registers the tdj placeholder
 	public PAPI(TreysDoubleJump plugin) {
 		super(plugin, "tdj");
 	}
 
+	// Registers the placeholders
 	@Override
 	public String onPlaceholderRequest(Player p, String identifier) {
 		if (p == null){

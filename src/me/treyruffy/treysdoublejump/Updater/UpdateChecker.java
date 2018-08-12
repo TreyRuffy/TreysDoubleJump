@@ -9,11 +9,17 @@ import org.json.simple.JSONValue;
 
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class UpdateChecker {
 
+	// The URLs to check for new versions
 	final static String VERSION_URL = "https://api.spiget.org/v2/resources/19630/versions?size=" + Integer.MAX_VALUE;
 	final static String DESCRIPTION_URL = "https://api.spiget.org/v2/resources/19630/updates?size=" + Integer.MAX_VALUE;
 
+	// Checks for updates
 	public static Object[] getLastUpdate() {
         try {
             JSONArray versionsArray = (JSONArray) JSONValue.parseWithException(IOUtils.toString(new URL(String.valueOf(VERSION_URL)), "UTF-8"));

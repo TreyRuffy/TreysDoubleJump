@@ -8,8 +8,13 @@ import me.treyruffy.treysdoublejump.Interfaces.ParticlesMain;
 import net.minecraft.server.v1_8_R1.EnumParticle;
 import net.minecraft.server.v1_8_R1.PacketPlayOutWorldParticles;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class Particle_1_8_R1 implements ParticlesMain {
 
+	// Sets particles using packets for 1.8
 	@Override
 	public void sendParticle(Player p, String particle, Location loc, int amount, int r, int g, int b) {
 		int x = 0;

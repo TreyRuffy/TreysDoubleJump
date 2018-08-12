@@ -1,5 +1,7 @@
 package me.treyruffy.treysdoublejump;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -16,12 +18,22 @@ import me.treyruffy.treysdoublejump.Util.ConfigManager;
 import me.treyruffy.treysdoublejump.Util.MVdWPAPI;
 import me.treyruffy.treysdoublejump.Util.Metrics;
 import me.treyruffy.treysdoublejump.Util.PAPI;
+import me.treyruffy.treysdoublejump.Util.UpdateManager;
+
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
 	
+	//
+	public static File dataFolder;
 	
+	// Sets up everything
 	@Override
 	public void onEnable(){
+		dataFolder = getDataFolder();
+		new UpdateManager().setup();
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(this, this);
 		pm.registerEvents(new Updates(), this);
@@ -56,6 +68,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		Updates.updateCheck();
 	}  
 	
+	// Grabs the cooldown from config
 	public static Integer getCooldown(Player p){
 		return DoubleJump.getCooldown(p);
 	}

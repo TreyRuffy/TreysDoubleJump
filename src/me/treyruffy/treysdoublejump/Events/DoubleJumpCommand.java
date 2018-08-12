@@ -11,11 +11,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
+import me.treyruffy.treysdoublejump.Util.UpdateManager;
+
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
 
 public class DoubleJumpCommand implements CommandExecutor {
 
+	// Players in this list cannot use double jump
 	public static List<String> DisablePlayers = new ArrayList<String>();
 	
+	// All the commands for /tdj
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("tdj")) {
@@ -58,6 +65,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 				sender.sendMessage(ChatColor.BLUE + "-=====[" + ChatColor.AQUA + ChatColor.BOLD + " TDJ " + ChatColor.BLUE + "]=====-");
 				sender.sendMessage(ChatColor.GREEN + "Reloading the double jump YAML files...");
 				try {
+					new UpdateManager().setup();
 					ConfigManager.reloadConfig();
 					sender.sendMessage(ChatColor.GREEN + "Reloaded the double jump YAML files successfully!");
 					sender.sendMessage(ChatColor.BLUE + "-======================-");

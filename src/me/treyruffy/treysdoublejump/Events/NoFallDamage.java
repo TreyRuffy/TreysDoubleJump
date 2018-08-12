@@ -9,8 +9,13 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 
+/**
+ * Created by TreyRuffy on 08/12/2018.
+ */
+
 public class NoFallDamage implements Listener {
 
+	// Cancels damage if no fall is enabled
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void noFall(EntityDamageEvent e) {
 		if (ConfigManager.getConfig().getBoolean("NoFall.Enabled")){
