@@ -6,10 +6,11 @@ description: ${project.description}
 website: ${project.url}
 prefix: Trey's Double Jump
 softdepend: [NoCheatPlus, PlaceholderAPI, MVdWPlaceholderAPI]
+api-version: 1.13
 permissions:
   tdj.*:
     default: op
-    description: Be a h4x0r and get all double jump features.
+    description: Get granted all the double jump permissions.
     children:
       tdj.ncp: true
       tdj.use: true

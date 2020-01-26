@@ -26,6 +26,9 @@ import me.treyruffy.treysdoublejump.NMS.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_12_R1.Particle_1_12_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_13_R1.Particle_1_13_R1;
+import me.treyruffy.treysdoublejump.NMS.v1_13_R2.Particle_1_13_R2;
+import me.treyruffy.treysdoublejump.NMS.v1_14_R1.Particle_1_14_R1;
+import me.treyruffy.treysdoublejump.NMS.v1_15_R1.Particle_1_15_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R1.Particle_1_8_R1;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R2.Particle_1_8_R2;
 import me.treyruffy.treysdoublejump.NMS.v1_8_R3.Particle_1_8_R3;
@@ -231,6 +234,16 @@ public class DoubleJump implements Listener {
     			particles = new Particle_1_12_R1();
     		} else if (version.equals("v1_13_R1")) {
     			particles = new Particle_1_13_R1();
+    		} else if (version.equals("v1_13_R2")) {
+    			particles = new Particle_1_13_R2();
+    		} else if (version.equals("v1_14_R1")) {
+    			particles = new Particle_1_14_R1();
+    		} else if (version.equals("v1_15_R1")) {
+    			particles = new Particle_1_15_R1();
+    		} else {
+    			if (version.substring(3).startsWith("1")) {
+    				particles = new Particle_1_15_R1();
+    			}
     		}
     		if (ConfigManager.getConfig().getBoolean("Particles.AllPlayers")){
 				for (Player players : Bukkit.getOnlinePlayers()){

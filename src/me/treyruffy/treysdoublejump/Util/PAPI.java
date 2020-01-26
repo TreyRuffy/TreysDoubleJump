@@ -2,24 +2,36 @@ package me.treyruffy.treysdoublejump.Util;
 
 import org.bukkit.entity.Player;
 
-import me.clip.placeholderapi.external.EZPlaceholderHook;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.API.DoubleJump;
 import me.treyruffy.treysdoublejump.API.Flight;
 
 /**
  * Created by TreyRuffy on 08/12/2018.
+ * Updated 01/26/2020.
  */
 
-public class PAPI extends EZPlaceholderHook {
+public class PAPI extends PlaceholderExpansion {
 
+	private TreysDoubleJump plugin;
+	
 	// Registers the tdj placeholder
 	public PAPI(TreysDoubleJump plugin) {
-		super(plugin, "tdj");
+		this.plugin = plugin;
+	}
+	
+	@Override
+	public boolean persist() {
+		return true;
 	}
 
-	// Registers the placeholders
 	@Override
+	public boolean canRegister() {
+		return true;
+	}
+	
+	// Registers the placeholders
 	public String onPlaceholderRequest(Player p, String identifier) {
 		if (p == null){
 			return "";
@@ -41,6 +53,21 @@ public class PAPI extends EZPlaceholderHook {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public String getAuthor() {
+		return plugin.getDescription().getAuthors().toString();
+	}
+
+	@Override
+	public String getIdentifier() {
+		return "tdj";
+	}
+
+	@Override
+	public String getVersion() {
+		return plugin.getDescription().getVersion();
 	}
 
 }

@@ -2,6 +2,7 @@ package me.treyruffy.treysdoublejump;
 
 import java.io.File;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -16,12 +17,12 @@ import me.treyruffy.treysdoublejump.Events.NoFallDamage;
 import me.treyruffy.treysdoublejump.Updater.Updates;
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 import me.treyruffy.treysdoublejump.Util.MVdWPAPI;
-import me.treyruffy.treysdoublejump.Util.Metrics;
 import me.treyruffy.treysdoublejump.Util.PAPI;
 import me.treyruffy.treysdoublejump.Util.UpdateManager;
 
 /**
  * Created by TreyRuffy on 08/12/2018.
+ * Updated 01/26/2020
  */
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
@@ -32,6 +33,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 	// Sets up everything
 	@Override
 	public void onEnable(){
+		new ConfigManager();
+		ConfigManager.reloadConfig();
 		dataFolder = getDataFolder();
 		new UpdateManager().setup();
 		PluginManager pm = Bukkit.getPluginManager();
@@ -45,16 +48,15 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		getCommand("djreload").setExecutor(new DoubleJumpCommand());
 		getCommand("groundpound").setExecutor(new GroundPoundCommand());
 		
-		new ConfigManager();
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
-			new PAPI(this).hook();
+			new PAPI(this).register();
 		}
 		if (Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
 			MVdWPAPI.register(this);
 		}
-		ConfigManager.reloadConfig();
-		new Metrics(this);
-		
+		if (ConfigManager.getConfig().getBoolean("Metrics.Enabled")) {
+			new Metrics(this, 1848);
+		}
 		
 		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 		if ((version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){

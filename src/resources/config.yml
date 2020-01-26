@@ -95,3 +95,6 @@ EnabledWorlds:
     # The worlds you want double jumping and no fall damage enabled in
 DisabledBlocks: []
     # Blocks to disable the double jump, if standing on
+Metrics:
+    Enabled: true
+    # Do you want to enable metrics?
