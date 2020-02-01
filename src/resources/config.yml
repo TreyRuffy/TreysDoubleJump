@@ -51,6 +51,10 @@ NoFall:
 Cooldown:
     Enabled: false
     Time: 3
+InfiniteJump:
+    Enabled: false
+    # If this is enabled, the player does not need to be on the ground to double jump.
+    # Turn off the cooldown to infinitely double jump.
 Velocity:
     Forward: 1.6
     # Allows you to set the forward jump velocity
@@ -88,6 +92,8 @@ Particles:
 GroundPound:
     Enabled: true
     # Do you want players to be able to ground pound with tdj.groundpound
+    VelocityDown: 5
+    # What velocity do you want the groundpound to use?
 EnabledWorlds:
     - world
     - world_the_end

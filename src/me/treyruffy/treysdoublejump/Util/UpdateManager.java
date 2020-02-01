@@ -49,6 +49,35 @@ public class UpdateManager {
 				FileUtils.writeLines(file, lines);
 				
 			}
+			if (!config.contains("Metrics")) {
+				
+				lines.addAll(Arrays.asList(
+						"Metrics:",
+						"    Enabled: true",
+						"    # Do you want to enable metrics?"));
+				
+				FileUtils.writeLines(file, lines);
+				
+			}
+			if (!config.contains("InfiniteJump")) {
+				
+				lines.addAll(Arrays.asList(
+						"InfiniteJump:",
+						"    Enabled: false",
+						"    # If this is enabled, the player does not need to be on the ground to double jump.",
+						"    # Turn off the cooldown to infinitely double jump."));
+				
+				FileUtils.writeLines(file, lines);
+				
+			}
+			if (!config.contains("GroundPound.VelocityDown")) {
+				lines.addAll(Arrays.asList(
+						"GroundPound:",
+						"    VelocityDown: 5",
+						"    # What velocity do you want the groundpound to use?"));
+
+				FileUtils.writeLines(file, lines);
+			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

@@ -91,12 +91,6 @@ public class DoubleJump implements Listener {
 		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
 			return;
 		}
-		if (!p.isOnGround()) {
-			return;
-		}
-		if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
-			return;
-		}
 		if (!ConfigManager.getConfig().getStringList("DisabledBlocks").isEmpty()) {
 			for (String blocks : ConfigManager.getConfig().getStringList("DisabledBlocks")) {
 				try {
@@ -120,33 +114,69 @@ public class DoubleJump implements Listener {
 		if (FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		
-		if (Grounded.contains(p.getUniqueId().toString())) {
-			Grounded.remove(p.getUniqueId().toString());
-		}
-		
-		if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
-			if (p.hasPermission("tdj.ncp")) {
-				if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
-					p.setAllowFlight(true);
-					return;
-				}
-				NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
-				p.setAllowFlight(true);
-				NCPPlayer.add(p.getUniqueId().toString());
-				Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
-					
-					@Override
-					public void run() {
-						try {
-							NCPExemptionManager.unexempt(p, CheckType.MOVING_SURVIVALFLY);
-							NCPPlayer.remove(p.getUniqueId().toString());
-						} catch (Exception ex){}
-					}
-				}, 60L);
+		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled")) {
+			if (!p.isOnGround()) {
 				return;
 			}
-			return;
+			if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
+				return;
+			}
+			
+			
+			
+			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
+				if (p.hasPermission("tdj.ncp")) {
+					if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
+						p.setAllowFlight(true);
+						if (Grounded.contains(p.getUniqueId().toString())) {
+							Grounded.remove(p.getUniqueId().toString());
+						}
+						return;
+					}
+					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
+					p.setAllowFlight(true);
+					if (Grounded.contains(p.getUniqueId().toString())) {
+						Grounded.remove(p.getUniqueId().toString());
+					}
+					NCPPlayer.add(p.getUniqueId().toString());
+					Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
+						
+						@Override
+						public void run() {
+							try {
+								NCPExemptionManager.unexempt(p, CheckType.MOVING_SURVIVALFLY);
+								NCPPlayer.remove(p.getUniqueId().toString());
+							} catch (Exception ex){}
+						}
+					}, 60L);
+					return;
+				}
+				return;
+			}
+		} else {
+			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
+				if (p.hasPermission("tdj.ncp")) {
+					if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
+						p.setAllowFlight(true);
+						return;
+					}
+					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
+					p.setAllowFlight(true);
+					NCPPlayer.add(p.getUniqueId().toString());
+					Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
+						
+						@Override
+						public void run() {
+							try {
+								NCPExemptionManager.unexempt(p, CheckType.MOVING_SURVIVALFLY);
+								NCPPlayer.remove(p.getUniqueId().toString());
+							} catch (Exception ex){}
+						}
+					}, 60L);
+					return;
+				}
+				return;
+			}
 		}
 		
 		p.setAllowFlight(true);
@@ -177,11 +207,9 @@ public class DoubleJump implements Listener {
 		if (DoubleJumpCommand.DisablePlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		
 		if (!GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
 			Grounded.add(p.getUniqueId().toString());
 		}
-		
 		e.setCancelled(true);
 		p.setAllowFlight(false);
 		p.setFlying(false);
@@ -276,9 +304,6 @@ public class DoubleJump implements Listener {
 		if (!Grounded.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		if (p.isOnGround()) {
-			return;
-		}
 		if (FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
@@ -291,7 +316,7 @@ public class DoubleJump implements Listener {
 		if (GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		p.setVelocity(new Vector(0, -5, 0));
+		p.setVelocity(new Vector(0, -ConfigManager.getConfig().getDouble("GroundPound.VelocityDown"), 0));
 	}
 	
 }
