@@ -1,42 +1,50 @@
 package me.treyruffy.treysdoublejump.Updater;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.util.concurrent.CompletableFuture;
 
-import org.apache.commons.io.IOUtils;
-import org.bukkit.plugin.Plugin;
-
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import me.treyruffy.treysdoublejump.TreysDoubleJump;
-
 /**
- * Created by TreyRuffy on 08/12/2018.
- * Updated 01/26/2020.
+ * Created by TreyRuffy on 02/1/2020.
  */
 
 public class UpdateChecker {
 
-	// The URLs to check for new versions
-	final static String VERSION_URL = "https://api.spiget.org/v2/resources/19630/versions?size=" + Integer.MAX_VALUE;
-	final static String DESCRIPTION_URL = "https://api.spiget.org/v2/resources/19630/updates?size=" + Integer.MAX_VALUE;
-	
-	// Checks for updates
-	protected static String getLastUpdate(TreysDoubleJump plugin) {
-		String currentVersion = plugin.getDescription().getVersion();
-		try {
-			JsonParser parser =  new JsonParser();
-			JsonArray versions = parser.parse(IOUtils.toString(new URL(VERSION_URL), Charset.defaultCharset())).getAsJsonArray();
-			String lastVersion = versions.get(versions.size() - 1).getAsJsonObject().get("name").getAsString();
-			if (!lastVersion.equalsIgnoreCase(currentVersion)) {
-				return lastVersion;
-			}
-			return "";
-		} catch (Exception e) {
-			return "";
-		}
+	public static String request(final String RESOURCE_ID) {
 		
+			final String REQUEST_URL = "https://api.spiget.org/v2/resources/" + RESOURCE_ID + "/versions?size=" + Integer.MAX_VALUE + "&sort=-releaseDate";
+			try {
+				URL url = new URL(REQUEST_URL);
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				
+				connection.setRequestMethod("GET");
+	            connection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
+				
+				InputStream inputStream = connection.getInputStream();
+				InputStreamReader reader = new InputStreamReader(inputStream);
+				
+				JsonElement element = new JsonParser().parse(reader);
+	
+				if(!element.isJsonArray()) {
+					return "";
+				}
+				
+				reader.close();
+				
+				JsonObject latestVersion = element.getAsJsonArray().get(0).getAsJsonObject();
+				
+				return latestVersion.get("name").getAsString();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "";
+			}
 	}
+	
 }
