@@ -17,7 +17,7 @@ import com.google.gson.JsonParser;
 
 public class UpdateChecker {
 
-	public static String request(final String RESOURCE_ID) {
+	public static String request(final String RESOURCE_ID, final String PLUGIN_NAME) {
 		
 			final String REQUEST_URL = "https://api.spiget.org/v2/resources/" + RESOURCE_ID + "/versions?size=" + Integer.MAX_VALUE + "&sort=-releaseDate";
 			try {
@@ -25,7 +25,7 @@ public class UpdateChecker {
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 				
 				connection.setRequestMethod("GET");
-	            connection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
+	            connection.addRequestProperty("User-Agent", PLUGIN_NAME);
 				
 				InputStream inputStream = connection.getInputStream();
 				InputStreamReader reader = new InputStreamReader(inputStream);
@@ -45,6 +45,10 @@ public class UpdateChecker {
 				e.printStackTrace();
 				return "";
 			}
+	}
+	
+	public static String request(final String RESOURCE_ID) {
+		return request(RESOURCE_ID, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
 	}
 	
 }

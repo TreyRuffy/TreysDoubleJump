@@ -153,6 +153,13 @@ public class DoubleJump implements Listener {
 				}
 				return;
 			}
+			Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), new Runnable() {
+				
+				@Override
+				public void run() {
+					p.setAllowFlight(true);
+				}
+			}, 1L);
 		} else {
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
 				if (p.hasPermission("tdj.ncp")) {
@@ -177,9 +184,10 @@ public class DoubleJump implements Listener {
 				}
 				return;
 			}
+			p.setAllowFlight(true);
 		}
 		
-		p.setAllowFlight(true);
+		
 	}
 	
 	// Checks if the player requested flight, without having access to it, so it can remove flight and set the player's velocity, particles, etc
@@ -281,7 +289,11 @@ public class DoubleJump implements Listener {
 				particles.sendParticle(p, ConfigManager.getConfig().getString("Particles.Type"), p.getLocation(), ConfigManager.getConfig().getInt("Particles.Amount"), ConfigManager.getConfig().getInt("Particles.R"), ConfigManager.getConfig().getInt("Particles.G"), ConfigManager.getConfig().getInt("Particles.B"));
 			}
     	}
-    	p.setFallDistance(-256);
+    	if (ConfigManager.getConfig().getBoolean("NoFall.Enabled")){
+    		if (p.hasPermission("tdj.nofall")){
+    			p.setFallDistance(-256);
+    		}
+    	}
 		return;
 	}
 	

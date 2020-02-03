@@ -25,7 +25,7 @@ public class Updates implements Listener {
 	public static void updateCheck(){
 		if (ConfigManager.getConfig().getBoolean("Updates.Check")){
 			
-			String latestUpdate = UpdateChecker.request("19630");
+			String latestUpdate = UpdateChecker.request("19630", Bukkit.getPluginManager().getPlugin("TreysDoubleJump").getDescription().getName() + " v" + Bukkit.getPluginManager().getPlugin("TreysDoubleJump").getDescription().getVersion());
 			if (latestUpdate == "") {
 				return;
 			}
@@ -68,7 +68,7 @@ public class Updates implements Listener {
 		if (!ConfigManager.getConfig().getBoolean("Updates.TellPlayers")){
 			return;
 		}
-		String latestUpdate = UpdateChecker.request("19630");
+		String latestUpdate = UpdateChecker.request("19630", Bukkit.getPluginManager().getPlugin("TreysDoubleJump").getDescription().getName() + " v" + Bukkit.getPluginManager().getPlugin("TreysDoubleJump").getDescription().getVersion());
 		if (latestUpdate == "") {
 			return;
 		}
