@@ -1,0 +1,67 @@
+main: me.treyruffy.treysdoublejump.TreysDoubleJump
+version: 2.5.3
+name: TreysDoubleJumpMain
+author: TreyRuffy
+description: Allows you to double jump!
+website: https://www.spigotmc.org/resources/19630/TreysDoubleJumpMain/
+prefix: Trey's Double Jump
+softdepend: [NoCheatPlus, PlaceholderAPI, MVdWPlaceholderAPI]
+api-version: 1.13
+permissions:
+  tdj.*:
+    default: op
+    description: Get granted all the double jump permissions.
+    children:
+      tdj.ncp: true
+      tdj.use: true
+      tdj.sounds: true
+      tdj.particles: true
+      tdj.command: true
+      tdj.nofall: true
+      tdj.fly: true
+      tdj.updates: true
+      tdj.groundpound: true
+      tdj.groundpoundcommand: true
+  tdj.use:
+    default: true
+    description: Use the double jump feature.
+  tdj.ncp:
+    default: op
+    description: Use the double jump feature with NCP.
+  tdj.sounds:
+    default: true
+    description: Sounds whilst double jumping.
+  tdj.particles:
+    default: true
+    description: Particles whilst double jumping.
+  tdj.command:
+    default: true
+    description: /dj
+  tdj.nofall:
+    default: true
+    description: No fall when you have double jump on.
+  tdj.fly:
+    default: op
+    description: Allows you to fly!
+  tdj.updates:
+    default: op
+    description: Tells these players there is an update for TDJ
+  tdj.groundpound:
+    default: true
+    description: Allows players to ground pound
+  tdj.groundpoundcommand:
+    default: true
+    description: Allows players to toggle their ground pounding
+commands:
+  tdj:
+    description: Allows you to toggle double jumping.
+    aliases: [dj, doublejump, treysdoublejump]
+  fly:
+    description: Allows you to fly!
+    aliases: [flight, togglefly, toggleflight]
+  groundpound:
+    description: Allows you to toggle ground pounding
+    aliases: [togglegroundpound]
+  djreload:
+    description: Allows you to reload the configs
+    aliases: [doublejumpreload]

@@ -68,6 +68,10 @@
       <id>CodeMC</id>
       <url>https://repo.codemc.org/repository/maven-public</url>
     </repository>
+    <repository>
+      <id>dre-repo</id>
+      <url>https://erethon.de/repo</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
@@ -79,7 +83,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>LATEST</version>
+      <version>1.15.2-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>

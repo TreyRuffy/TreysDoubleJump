@@ -47,3 +47,9 @@ Temporary Items
 .apdisk
 /bin/
 /target/
+
+# Trey's Double Jump
+./
+.idea/
+TreysDoubleJump.iml
+src/target/
