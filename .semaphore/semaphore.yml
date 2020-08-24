@@ -8,7 +8,7 @@ blocks:
   - name: Maven
     task:
       jobs:
-        - name: Install CraftBukkit
+        - name: Build
           commands:
             - checkout
             - sem-version java 1.8
@@ -21,6 +21,4 @@ blocks:
             - 'if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.10.2-R0.1-SNAPSHOT/craftbukkit-1.10.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.10.2 ; else echo "Not compiling CraftBukkit 1.10.2 because it is already in our maven repo" ; fi'
             - 'if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.11.2-R0.1-SNAPSHOT/craftbukkit-1.11.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.11.2 ; else echo "Not compiling CraftBukkit 1.11.2 because it is already in our maven repo" ; fi'
             - 'if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.12.2-R0.1-SNAPSHOT/craftbukkit-1.12.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.12.2 ; else echo "Not compiling CraftBukkit 1.12.2 because it is already in our maven repo" ; fi'
-        - name: Build
-          commands:
             - mvn -B package --file pom.xml
