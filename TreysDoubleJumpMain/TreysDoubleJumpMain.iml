@@ -37,14 +37,14 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: fr.neatmonster:nocheatplus:3.16.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: be.maximvdw:MVdWPlaceholderAPI:3.1.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.1" level="project" />
-    <orderEntry type="module" module-name="v1_8_R1" />
-    <orderEntry type="module" module-name="v1_8_R2" />
-    <orderEntry type="module" module-name="v1_8_R3" />
-    <orderEntry type="module" module-name="v1_9_R1" />
-    <orderEntry type="module" module-name="v1_9_R2" />
-    <orderEntry type="module" module-name="v1_10_R1" />
-    <orderEntry type="module" module-name="v1_11_R1" />
-    <orderEntry type="module" module-name="v1_12_R1" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv18R1:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv18R2:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv18R3:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv19R1:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv19R2:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv110R1:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv111R1:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: me.treyruffy.treysdoublejump:TreysDoubleJumpv112R1:2.5.3" level="project" />
     <orderEntry type="module" module-name="NmsReference" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
   </component>
