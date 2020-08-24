@@ -118,47 +118,47 @@
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv18R1</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv18R2</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv18R3</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv19R1</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv19R2</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv110R1</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv111R1</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpv112R1</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.treyruffy.treysdoublejump</groupId>
             <artifactId>TreysDoubleJumpNmsReference</artifactId>
-            <version>2.5.3</version>
+            <version>2.5.4</version>
         </dependency>
     </dependencies>
 
