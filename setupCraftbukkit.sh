@@ -13,8 +13,7 @@ wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifac
 cd "$HOME"/craftbukkit || exit
 
 chmod +rx BuildTools.jar
-
+fi
 # Build spigot
 echo "Building Spigot using Spigot Build Tools for minecraft version $1"
 java -jar BuildTools.jar --rev "$1" --compile CRAFTBUKKIT,SPIGOT
-fi
