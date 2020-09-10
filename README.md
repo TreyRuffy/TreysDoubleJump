@@ -13,13 +13,13 @@
 This plugin only works on Bukkit and Spigot servers including forks (PaperMC).
 
  ## Usage
-`/tdj - Toggles double jumping`
+`/tdj` - Toggles double jumping
 
-`/fly - Allows you to fly`
+`/fly` - Allows you to fly
 
-`/groundpound - Allows you to toggle ground pounding`
+`/groundpound` - Allows you to toggle ground pounding
 
-`/djreload - Allows you to reload the configuration files`
+`/djreload` - Allows you to reload the configuration files
 
 ## CraftBukkit Script
 In order to get the required CraftBukkit libraries for CI programs, this plugin uses a script in order to
