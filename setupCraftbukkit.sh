@@ -16,5 +16,11 @@ cd "$HOME"/craftbukkit || exit
 chmod +rx BuildTools.jar
 
 # Build spigot
-echo "Building Spigot using Spigot Build Tools for minecraft version $1"
+if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/$1-R0.1-SNAPSHOT/craftbukkit-$1-R0.1-SNAPSHOT.jar" ]; then
+echo "Building CraftBukkit using Spigot Build Tools for Minecraft version $1"
 java -jar BuildTools.jar --rev "$1" --compile CRAFTBUKKIT,SPIGOT
+
+else echo "CraftBukkit for Minecraft version $1 already exists in the repository"
+
+fi
+
