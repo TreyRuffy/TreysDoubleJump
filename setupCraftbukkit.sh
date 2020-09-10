@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Created by TreyRuffy for Trey's Double Jump
+# Feel free to use as you need for any of your projects.
+# In order to make this execute commands, read the .semaphore/sempaphore.yml and the
+# .github/workflows/codeql-analysis.yml files
 if [ $# -eq 0 ]; then
     echo "Missing arguments"
     exit 1
