@@ -5,10 +5,10 @@
 # In order to make this execute commands, read the .semaphore/sempaphore.yml and the
 # .github/workflows/codeql-analysis.yml files
 
-# First argument is the version of Spigot (eg. 1.16.2)
+# First argument is the version of Spigot (eg. 1.16.3)
 # Second argument is if you should force update the Spigot files
 #   Set as true for yes
-# Run bash setupCraftbukkit.sh 1.16.2 true
+# Run bash setupCraftbukkit.sh 1.16.3 true
 if [ $# -eq 0 ]; then
     echo "Missing arguments"
     exit 1
@@ -16,7 +16,7 @@ fi
 
 forceUpdate=false;
 
-if [ $# -eq 2 ] && [ "$2" == 'true' ]; then
+if [ $# -eq 2 ] && [ "$2" == "true" ]; then
   forceUpdate=true;
 fi
 
