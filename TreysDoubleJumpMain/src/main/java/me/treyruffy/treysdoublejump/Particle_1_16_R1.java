@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
  * Created by TreyRuffy on 01/26/2020.
  */
 
-public class Particle_1_15_R1 implements ParticlesMain {
+public class Particle_1_16_R1 implements ParticlesMain {
 
 	// Sets particles using packets for 1.15
 	@Override

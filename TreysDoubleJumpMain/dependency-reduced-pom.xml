@@ -78,11 +78,6 @@
       <id>CodeMC</id>
       <url>https://repo.codemc.org/repository/maven-public</url>
     </repository>
-    <repository>
-      <id>mvdw-software</id>
-      <name>MVdW Public Repositories</name>
-      <url>http://repo.mvdw-software.be/content/groups/public/</url>
-    </repository>
   </repositories>
   <dependencies>
     <dependency>
@@ -94,7 +89,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.15.2-R0.1-SNAPSHOT</version>
+      <version>1.16.3-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -124,32 +119,6 @@
       <artifactId>nocheatplus</artifactId>
       <version>3.16.1-SNAPSHOT</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>be.maximvdw</groupId>
-      <artifactId>MVdWPlaceholderAPI</artifactId>
-      <version>3.1.1-SNAPSHOT</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>spigot-api</artifactId>
-          <groupId>org.spigotmc</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>MVdWUpdater</artifactId>
-          <groupId>be.maximvdw</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-          <groupId>org.eclipse.paho</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-      <version>19.0.0</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.treyruffy.treysdoublejump.nmsreference.ParticlesMain;
-import me.treyruffy.treysdoublejump.Particle_1_15_R1;
+import me.treyruffy.treysdoublejump.Particle_1_16_R1;
 import me.treyruffy.treysdoublejump.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.v1_12_R1.Particle_1_12_R1;
@@ -109,15 +109,11 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled")) {
-			if (!p.isOnGround()) {
+			if (!p.isOnGround() || p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
 				return;
 			}
-			if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
-				return;
-			}
-			
-			
-			
+
+
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
 				if (p.hasPermission("tdj.ncp")) {
 					if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
@@ -257,11 +253,12 @@ public class DoubleJump implements Listener {
 				case "v1_13_R2":
 				case "v1_14_R1":
 				case "v1_15_R1":
-					particles = new Particle_1_15_R1();
+				case "v1_16_R1":
+					particles = new Particle_1_16_R1();
 					break;
 				default:
 					if (version.substring(3).startsWith("1")) {
-						particles = new Particle_1_15_R1();
+						particles = new Particle_1_16_R1();
 					}
 					break;
 			}
