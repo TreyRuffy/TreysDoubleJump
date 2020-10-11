@@ -39,4 +39,3 @@ java -jar BuildTools.jar --rev "$1" --compile CRAFTBUKKIT,SPIGOT
 else echo "CraftBukkit for Minecraft version $1 already exists in the repository"
 
 fi
-
