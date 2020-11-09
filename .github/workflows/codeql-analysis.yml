@@ -27,6 +27,14 @@ jobs:
     - run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
 
+    - name: Cache Maven Repo
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
     - name: Setup CraftBukkit Dependencies
       run: |
         chmod +rx setupCraftbukkit.sh
@@ -38,14 +46,6 @@ jobs:
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.10.2-R0.1-SNAPSHOT/craftbukkit-1.10.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.10.2 ; else echo "Not compiling CraftBukkit 1.10.2 because it is already in our maven repo" ; fi
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.11.2-R0.1-SNAPSHOT/craftbukkit-1.11.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.11.2 ; else echo "Not compiling CraftBukkit 1.11.2 because it is already in our maven repo" ; fi
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.12.2-R0.1-SNAPSHOT/craftbukkit-1.12.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.12.2 ; else echo "Not compiling CraftBukkit 1.12.2 because it is already in our maven repo" ; fi
-
-    - name: Cache Maven Repo
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-            ${{ runner.os }}-maven-
 
       # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
