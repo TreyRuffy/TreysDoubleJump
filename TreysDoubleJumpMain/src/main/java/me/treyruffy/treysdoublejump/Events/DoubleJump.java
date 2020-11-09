@@ -3,8 +3,11 @@ package me.treyruffy.treysdoublejump.Events;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import me.treyruffy.treysdoublejump.API.DoubleJumpEvent;
+import me.treyruffy.treysdoublejump.API.GroundPoundEvent;
+import me.treyruffy.treysdoublejump.API.PreDoubleJumpEvent;
 import me.treyruffy.treysdoublejump.nmsreference.ParticlesMain;
-import me.treyruffy.treysdoublejump.Particle_1_16_R1;
+import me.treyruffy.treysdoublejump.Particle_1_16_R3;
 import me.treyruffy.treysdoublejump.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.v1_12_R1.Particle_1_12_R1;
@@ -117,11 +120,23 @@ public class DoubleJump implements Listener {
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
 				if (p.hasPermission("tdj.ncp")) {
 					if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
+						PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+						Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+						if (preDoubleJumpEvent.isCancelled()) {
+							return;
+						}
 						p.setAllowFlight(true);
 						Grounded.remove(p.getUniqueId().toString());
 						return;
 					}
 					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
+					PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+					Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+					if (preDoubleJumpEvent.isCancelled()) {
+						return;
+					}
 					p.setAllowFlight(true);
 					Grounded.remove(p.getUniqueId().toString());
 					NCPPlayer.add(p.getUniqueId().toString());
@@ -135,15 +150,36 @@ public class DoubleJump implements Listener {
 				}
 				return;
 			}
-			Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), () -> p.setAllowFlight(true), 1L);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class),
+					() -> {
+						PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+						Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+						if (preDoubleJumpEvent.isCancelled()) {
+							return;
+						}
+						p.setAllowFlight(true);
+					}, 1L);
 		} else {
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
 				if (p.hasPermission("tdj.ncp")) {
 					if (NCPExemptionManager.isExempted(p, CheckType.MOVING_SURVIVALFLY)) {
+						PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+						Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+						if (preDoubleJumpEvent.isCancelled()) {
+							return;
+						}
 						p.setAllowFlight(true);
 						return;
 					}
 					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
+					PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+					Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+					if (preDoubleJumpEvent.isCancelled()) {
+						return;
+					}
 					p.setAllowFlight(true);
 					NCPPlayer.add(p.getUniqueId().toString());
 					Bukkit.getScheduler().scheduleSyncDelayedTask(TreysDoubleJump.getPlugin(TreysDoubleJump.class), () -> {
@@ -154,6 +190,12 @@ public class DoubleJump implements Listener {
 					}, 60L);
 					return;
 				}
+				return;
+			}
+			PreDoubleJumpEvent preDoubleJumpEvent = new PreDoubleJumpEvent(p, false);
+
+			Bukkit.getPluginManager().callEvent(preDoubleJumpEvent);
+			if (preDoubleJumpEvent.isCancelled()) {
 				return;
 			}
 			p.setAllowFlight(true);
@@ -181,22 +223,62 @@ public class DoubleJump implements Listener {
 		if (!p.hasPermission("tdj.use")) {
 			return;
 		}
-		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
+		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())) {
 			return;
 		}
 		if (DoubleJumpCommand.DisablePlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		if (!GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
-			Grounded.add(p.getUniqueId().toString());
+
+		boolean cooldownEnabled = ConfigManager.getConfig().getBoolean("Cooldown.Enabled");
+		int cooldownTime = ConfigManager.getConfig().getInt("Cooldown.Time");
+
+		double velocityForward;
+		double velocityUp;
+		if (p.isSprinting()) {
+			velocityForward = ConfigManager.getConfig().getDouble("Velocity.SprintingForward");
+			velocityUp = ConfigManager.getConfig().getDouble("Velocity.SprintingUp");
+		} else {
+			velocityForward = ConfigManager.getConfig().getDouble("Velocity.Forward");
+			velocityUp = ConfigManager.getConfig().getDouble("Velocity.Up");
 		}
+
+		boolean soundsEnabled = ((p.hasPermission("tdj.sounds")) && (ConfigManager.getConfig().getBoolean("Sounds" +
+				".Enabled")));
+
+		Sound sound = Sound.valueOf(ConfigManager.getConfig().getString("Sounds.Type"));
+		float volume = (float) ConfigManager.getConfig().getDouble("Sounds.Volume");
+		float pitch = (float) ConfigManager.getConfig().getDouble("Sounds.Pitch");
+
+		boolean particlesEnabled = ((p.hasPermission("tdj.particles")) && (ConfigManager.getConfig().getBoolean(
+				"Particles.Enabled")));
+		boolean particlesForEveryone = ConfigManager.getConfig().getBoolean("Particles.AllPlayers");
+		String particleType = ConfigManager.getConfig().getString("Particles.Type");
+		int particleAmount = ConfigManager.getConfig().getInt("Particles.Amount");
+		float r = (float) ConfigManager.getConfig().getDouble("Particles.R");
+		float g = (float) ConfigManager.getConfig().getDouble("Particles.G");
+		float b = (float) ConfigManager.getConfig().getDouble("Particles.B");
+
+		DoubleJumpEvent doubleJumpEvent = new DoubleJumpEvent(p, cooldownEnabled, cooldownTime, velocityForward,
+				velocityUp, soundsEnabled, sound, volume, pitch, particlesEnabled, particlesForEveryone, particleType,
+				particleAmount, r, g, b);
+
+		Bukkit.getPluginManager().callEvent(doubleJumpEvent);
+
 		e.setCancelled(true);
 		p.setAllowFlight(false);
 		p.setFlying(false);
-		
-		
-		if (ConfigManager.getConfig().getBoolean("Cooldown.Enabled")){
-			cooldown.put(p, ConfigManager.getConfig().getInt("Cooldown.Time"));
+
+        if (doubleJumpEvent.isCancelled()) {
+        	return;
+		}
+
+	    if (!GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
+			Grounded.add(p.getUniqueId().toString());
+		}
+
+		if (doubleJumpEvent.isCooldownEnabled()) {
+			cooldown.put(p, doubleJumpEvent.getCooldownTime());
 			cooldownTask.put(p, new BukkitRunnable() {
 				@Override
 				public void run() {
@@ -210,20 +292,17 @@ public class DoubleJump implements Listener {
 			});
 			cooldownTask.get(p).runTaskTimer(TreysDoubleJump.getPlugin(TreysDoubleJump.class), 20, 20);
 		}
-		
-		if (p.isSprinting()) {
-			p.setVelocity(p.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.SprintingForward")).setY(ConfigManager.getConfig().getDouble("Velocity.SprintingUp")));
-		} else {
-			p.setVelocity(p.getLocation().getDirection().multiply(ConfigManager.getConfig().getDouble("Velocity.Forward")).setY(ConfigManager.getConfig().getDouble("Velocity.Up")));
+
+		p.setVelocity(p.getLocation().getDirection().multiply(doubleJumpEvent.getVelocityForward()).setY(doubleJumpEvent.getVelocityUp()));
+
+		if (doubleJumpEvent.soundsEnabled()) {
+			p.playSound(p.getLocation(), doubleJumpEvent.getSound(), doubleJumpEvent.getVolume(),
+					doubleJumpEvent.getPitch());
 		}
-		
-		if ((p.hasPermission("tdj.sounds")) && (ConfigManager.getConfig().getBoolean("Sounds.Enabled"))) {
-			p.playSound(p.getLocation(), Sound.valueOf(ConfigManager.getConfig().getString("Sounds.Type")), ConfigManager.getConfig().getInt("Sounds.Volume"), ConfigManager.getConfig().getInt("Sounds.Pitch"));
-		} 
-		
-    	if ((p.hasPermission("tdj.particles")) && (ConfigManager.getConfig().getBoolean("Particles.Enabled"))){
-    		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-    		ParticlesMain particles = null;
+
+		if (doubleJumpEvent.particlesEnabled()) {
+			String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+			ParticlesMain particles = null;
 			switch (version) {
 				case "v1_8_R1":
 					particles = new Particle_1_8_R1();
@@ -254,24 +333,30 @@ public class DoubleJump implements Listener {
 				case "v1_14_R1":
 				case "v1_15_R1":
 				case "v1_16_R1":
-					particles = new Particle_1_16_R1();
+				case "v1_16_R2":
+				case "v1_16_R3":
+					particles = new Particle_1_16_R3();
 					break;
 				default:
 					if (version.substring(3).startsWith("1")) {
-						particles = new Particle_1_16_R1();
+						particles = new Particle_1_16_R3();
 					}
 					break;
 			}
-    		if (ConfigManager.getConfig().getBoolean("Particles.AllPlayers")){
-				for (Player players : Bukkit.getOnlinePlayers()){
+			if (doubleJumpEvent.isParticlesForEveryone()) {
+				for (Player players : Bukkit.getOnlinePlayers()) {
 					assert particles != null;
-					particles.sendParticle(players, ConfigManager.getConfig().getString("Particles.Type"), p.getLocation(), ConfigManager.getConfig().getInt("Particles.Amount"), ConfigManager.getConfig().getInt("Particles.R"), ConfigManager.getConfig().getInt("Particles.G"), ConfigManager.getConfig().getInt("Particles.B"));
+					particles.sendParticle(players, doubleJumpEvent.getParticleType(), p.getLocation(),
+							doubleJumpEvent.getParticleAmount(), doubleJumpEvent.getParticleR(),
+							doubleJumpEvent.getParticleG(), doubleJumpEvent.getParticleB());
 				}
 			} else {
 				assert particles != null;
-				particles.sendParticle(p, ConfigManager.getConfig().getString("Particles.Type"), p.getLocation(), ConfigManager.getConfig().getInt("Particles.Amount"), ConfigManager.getConfig().getInt("Particles.R"), ConfigManager.getConfig().getInt("Particles.G"), ConfigManager.getConfig().getInt("Particles.B"));
+				particles.sendParticle(p, doubleJumpEvent.getParticleType(),
+						p.getLocation(), doubleJumpEvent.getParticleAmount(), doubleJumpEvent.getParticleR(),
+						doubleJumpEvent.getParticleG(), doubleJumpEvent.getParticleB());
 			}
-    	}
+		}
 	}
 	
 	// Checks whether the player tries to sneak while double jumping, if they have permission to
@@ -299,13 +384,21 @@ public class DoubleJump implements Listener {
 		if (DoubleJumpCommand.DisablePlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		if (!ConfigManager.getConfig().getBoolean("GroundPound.Enabled")){
+
+		boolean isCancelled = !ConfigManager.getConfig().getBoolean("GroundPound.Enabled");
+		double velocityDown = ConfigManager.getConfig().getDouble("GroundPound.VelocityDown");
+
+		GroundPoundEvent groundPoundEvent = new GroundPoundEvent(p, isCancelled, velocityDown);
+
+		Bukkit.getPluginManager().callEvent(groundPoundEvent);
+
+		if (groundPoundEvent.isCancelled()){
 			return;
 		}
 		if (GroundPoundCommand.groundPoundDisabled.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		p.setVelocity(new Vector(0, -ConfigManager.getConfig().getDouble("GroundPound.VelocityDown"), 0));
+		p.setVelocity(new Vector(0, -groundPoundEvent.getVelocityDown(), 0));
 	}
 	
 }
