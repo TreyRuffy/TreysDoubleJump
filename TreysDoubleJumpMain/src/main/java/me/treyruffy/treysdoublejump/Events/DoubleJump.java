@@ -90,7 +90,7 @@ public class DoubleJump implements Listener {
 		if (!ConfigManager.getConfig().getStringList("DisabledBlocks").isEmpty()) {
 			for (String blocks : ConfigManager.getConfig().getStringList("DisabledBlocks")) {
 				try {
-					if (p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.valueOf(blocks.toUpperCase())) {
+					if (p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.valueOf(blocks.toUpperCase())) {
 						Grounded.remove(p.getUniqueId().toString());
 						return;
 					}
@@ -109,7 +109,7 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled")) {
-			if (!p.isOnGround() || p.getWorld().getBlockAt(p.getLocation().add(0, -2, 0)).getType() == Material.AIR) {
+			if (!p.isOnGround() || p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.AIR) {
 				return;
 			}
 
