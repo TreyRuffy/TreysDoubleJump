@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public interface ParticlesMain {
 
-	// Interface for all versions 1.8 - 1.15
-	void sendParticle(Player p, String particle, Location loc, int amount, int r, int g, int b);
+	// Interface for all versions 1.8 - 1.16.4+
+	void sendParticle(Player p, String particle, Location loc, int amount, float r, float g, float b);
 	
 }

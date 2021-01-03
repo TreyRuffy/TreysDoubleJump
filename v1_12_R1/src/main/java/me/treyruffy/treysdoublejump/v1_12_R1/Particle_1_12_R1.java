@@ -15,10 +15,10 @@ public class Particle_1_12_R1 implements ParticlesMain {
 
 	// Sets particles using packets for 1.12
 	@Override
-	public void sendParticle(Player p, String particle, Location loc, int amount, int r, int g, int b) {
+	public void sendParticle(Player p, String particle, Location loc, int amount, float r, float g, float b) {
 		int x = 0;
 		while (x <= amount){
-			PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.valueOf(particle), true, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ(), (float) r, (float) g, (float) b, 1, 0);
+			PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.valueOf(particle), true, (float) loc.getX(), (float) loc.getY(), (float) loc.getZ(), r, g, b, 1, 0);
 			((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
 			x++;
 		}

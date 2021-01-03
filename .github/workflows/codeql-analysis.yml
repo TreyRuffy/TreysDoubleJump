@@ -27,7 +27,16 @@ jobs:
     - run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
 
-    - run: |
+    - name: Cache Maven Repo
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: Setup CraftBukkit Dependencies
+      run: |
         chmod +rx setupCraftbukkit.sh
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.8-R0.1-SNAPSHOT/craftbukkit-1.8-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.8 ; else echo "Not compiling CraftBukkit 1.8 because it is already in our maven repo" ; fi
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.8.3-R0.1-SNAPSHOT/craftbukkit-1.8.3-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.8.3 ; else echo "Not compiling CraftBukkit 1.8.3 because it is already in our maven repo" ; fi
@@ -38,7 +47,7 @@ jobs:
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.11.2-R0.1-SNAPSHOT/craftbukkit-1.11.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.11.2 ; else echo "Not compiling CraftBukkit 1.11.2 because it is already in our maven repo" ; fi
         if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.12.2-R0.1-SNAPSHOT/craftbukkit-1.12.2-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.12.2 ; else echo "Not compiling CraftBukkit 1.12.2 because it is already in our maven repo" ; fi
 
-    # Initializes the CodeQL tools for scanning.
+      # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       # Override language selection by uncommenting this and choosing your languages
