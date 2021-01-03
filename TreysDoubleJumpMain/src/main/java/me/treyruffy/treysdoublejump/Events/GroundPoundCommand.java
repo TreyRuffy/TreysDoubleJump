@@ -28,6 +28,10 @@ public class GroundPoundCommand implements CommandExecutor {
 				if (sender instanceof Player) {
 					Player p = (Player) sender;
 					if (p.hasPermission("tdj.groundpoundcommand")) {
+						if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains((p).getWorld().getName())){
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.NotInWorld")));
+							return true;
+						}
 						if (groundPoundDisabled.contains(p.getUniqueId().toString())) {
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Messages.GroundPoundToggledOn")));
 							groundPoundDisabled.remove(p.getUniqueId().toString());

@@ -290,6 +290,9 @@ public class DoubleJump implements Listener {
 		if (!p.hasPermission("tdj.groundpound")) {
 			return;
 		}
+		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
+			return;
+		}
 		if (!Grounded.contains(p.getUniqueId().toString())) {
 			return;
 		}
