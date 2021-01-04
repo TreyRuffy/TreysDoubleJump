@@ -1,6 +1,6 @@
 # Trey's Double Jump
 [![Latest Version](https://img.shields.io/badge/dynamic/json?color=ed37aa&label=Latest%20Version&query=name&url=https%3A%2F%2Fapi.spiget.org%2Fv2%2Fresources%2F19630%2Fversions%2Flatest)](https://www.spigotmc.org/resources/treys-double-jump-api.19630/)
-![Minecraft Version Support](https://img.shields.io/badge/Minecraft%20Versions-1.8--1.16.2-9450cc)
+![Minecraft Version Support](https://img.shields.io/badge/Minecraft%20Versions-1.8--1.16.4-9450cc)
 [![Downloads](https://img.shields.io/badge/dynamic/json?color=2230f2&label=Downloads&query=downloads&url=https%3A%2F%2Fapi.spiget.org%2Fv2%2Fresources%2F19630)](https://www.spigotmc.org/resources/treys-double-jump-api.19630/)
 
 
@@ -28,7 +28,7 @@ In order to get the required CraftBukkit libraries for CI programs, this plugin 
   
 The basic command is
 ```bash
-bash setupCraftbukkit.sh 1.16.2
+bash setupCraftbukkit.sh 1.16.4
 ```
 Just replace 1.16.2 with the version you need and build tools will download the required CraftBukkit libraries into
  your Maven repository.
