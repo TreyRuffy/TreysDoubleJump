@@ -8,7 +8,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
-public class PlayerSwitchWorldEvent implements Listener {
+/**
+ * Created by TreyRuffy on 01/03/2021.
+ */
+
+public class PlayerWorldSwitchEvent implements Listener {
 
 	@EventHandler
 	public void switchWorldEvent(PlayerChangedWorldEvent e) {
