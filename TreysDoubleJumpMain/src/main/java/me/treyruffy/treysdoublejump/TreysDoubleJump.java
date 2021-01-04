@@ -9,11 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.treyruffy.treysdoublejump.Events.DoubleJump;
-import me.treyruffy.treysdoublejump.Events.DoubleJumpCommand;
-import me.treyruffy.treysdoublejump.Events.FlightCommand;
-import me.treyruffy.treysdoublejump.Events.GroundPoundCommand;
-import me.treyruffy.treysdoublejump.Events.NoFallDamage;
+import me.treyruffy.treysdoublejump.Events.*;
 import me.treyruffy.treysdoublejump.Updater.Updates;
 import me.treyruffy.treysdoublejump.Util.ConfigManager;
 import me.treyruffy.treysdoublejump.Util.PAPI;
@@ -48,6 +44,7 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		pm.registerEvents(new Updates(), this);
 		pm.registerEvents(new DoubleJump(), this);
 		pm.registerEvents(new NoFallDamage(), this);
+		pm.registerEvents(new PlayerSwitchWorldEvent(), this);
 		
 		getCommand("fly").setExecutor(new FlightCommand());
 		getCommand("tdj").setExecutor(new DoubleJumpCommand());
