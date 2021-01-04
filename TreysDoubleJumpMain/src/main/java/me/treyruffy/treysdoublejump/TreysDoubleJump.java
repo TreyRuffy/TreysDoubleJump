@@ -17,13 +17,14 @@ import me.treyruffy.treysdoublejump.Util.UpdateManager;
 
 /**
  * Created by TreyRuffy on 08/12/2018.
- * Updated 01/26/2020
+ * Updated 01/03/2021
  */
 
 public class TreysDoubleJump extends JavaPlugin implements Listener {
 
 	private static TreysDoubleJump instance;
 
+	public static String oldVersion;
 	public static TreysDoubleJump getInstance() {
 		return instance;
 	}
@@ -37,14 +38,17 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		instance = this;
 		new ConfigManager();
 		ConfigManager.reloadConfig();
+		oldVersion = ConfigManager.getConfig().getString("Version");
 		dataFolder = getDataFolder();
 		new UpdateManager().setup();
+		ConfigManager.getConfig().set("Version", this.getDescription().getVersion());
+		ConfigManager.saveConfig();
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(this, this);
 		pm.registerEvents(new Updates(), this);
 		pm.registerEvents(new DoubleJump(), this);
 		pm.registerEvents(new NoFallDamage(), this);
-		pm.registerEvents(new PlayerSwitchWorldEvent(), this);
+		pm.registerEvents(new PlayerWorldSwitchEvent(), this);
 		
 		getCommand("fly").setExecutor(new FlightCommand());
 		getCommand("tdj").setExecutor(new DoubleJumpCommand());
