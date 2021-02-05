@@ -111,7 +111,7 @@ public class DoubleJump implements Listener {
 		if (FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
 			return;
 		}
-		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled")) {
+		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled") || !p.hasPermission("tdj.infinitejump")) {
 			if (!p.isOnGround() || p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.AIR) {
 				return;
 			}

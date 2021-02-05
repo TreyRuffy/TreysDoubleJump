@@ -22,6 +22,7 @@ permissions:
       tdj.updates: true
       tdj.groundpound: true
       tdj.groundpoundcommand: true
+      tdj.infinitejump: true
   tdj.use:
     default: true
     description: Use the double jump feature.
@@ -52,6 +53,9 @@ permissions:
   tdj.groundpoundcommand:
     default: true
     description: Allows players to toggle their ground pounding
+  tdj.infinitejump:
+    default: true
+    description: Allows players to infinite jump if it is enabled in the configuration
 commands:
   tdj:
     description: Allows you to toggle double jumping.
