@@ -1,9 +1,0 @@
-Reload:
-  - Reloading
-ReloadSuccessful:
-  - Reload successful
-ReloadFailed:
-  - Reload failed
-
-UpdateFound:
-  - Update found

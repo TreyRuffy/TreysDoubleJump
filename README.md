@@ -13,9 +13,13 @@
 This plugin only works on Bukkit and Spigot servers including forks (PaperMC).
 
  ## Usage
-`/tdj` - Toggles double jumping
+`/tdj [enabled/disabled]` - Toggles double jumping
 
-`/fly` - Allows you to fly
+`/tdj <username> [enabled/disabled]` - Toggles double jumping for another player
+
+`/fly [enabled/disabled]` - Allows you to fly
+
+`/fly <username> [enabled/disabled]` - Allows you to set flight for another player
 
 `/groundpound` - Allows you to toggle ground pounding
 

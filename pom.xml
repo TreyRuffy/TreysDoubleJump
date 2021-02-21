@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
   
 	<groupId>me.treyruffy.treysdoublejump</groupId>
-	<artifactId>TreysDoubleJump</artifactId>
-	<version>2.6.2</version>
+	<artifactId>TreysDoubleJumpMain</artifactId>
+	<version>2.6.3</version>
 	<modules>
-		<module>TreysDoubleJumpMain</module>
+		<module>TreysDoubleJump</module>
 		<module>v1_8_R1</module>
 		<module>v1_8_R2</module>
 		<module>v1_8_R3</module>
@@ -20,7 +20,7 @@
 		<module>v1_12_R1</module>
 		<module>NmsReference</module>
 	</modules>
-	<name>TreysDoubleJump</name>
+	<name>TreysDoubleJumpMain</name>
 	<description>Allows you to double jump!</description>
 	<url>https://www.spigotmc.org/resources/19630/</url>
 	<packaging>pom</packaging>
