@@ -5,7 +5,8 @@ import me.treyruffy.treysdoublejump.Events.DoubleJumpCommand;
 import me.treyruffy.treysdoublejump.Events.GroundPoundCommand;
 import org.bukkit.entity.Player;
 
-/** Created by TreyRuffy on 08/12/2018. */
+/* Created by TreyRuffy on 08/12/2018. */
+/** The DoubleJump API */
 public class DoubleJumpAPI {
 
   /**
