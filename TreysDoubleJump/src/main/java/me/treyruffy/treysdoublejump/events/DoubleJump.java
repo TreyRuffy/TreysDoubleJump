@@ -1,14 +1,14 @@
-package me.treyruffy.treysdoublejump.Events;
+package me.treyruffy.treysdoublejump.events;
 
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import me.treyruffy.treysdoublejump.API.DoubleJumpEvent;
-import me.treyruffy.treysdoublejump.API.GroundPoundEvent;
-import me.treyruffy.treysdoublejump.API.PreDoubleJumpEvent;
 import me.treyruffy.treysdoublejump.Particle_1_16_R3;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
-import me.treyruffy.treysdoublejump.Util.ConfigManager;
+import me.treyruffy.treysdoublejump.api.DoubleJumpEvent;
+import me.treyruffy.treysdoublejump.api.GroundPoundEvent;
+import me.treyruffy.treysdoublejump.api.PreDoubleJumpEvent;
 import me.treyruffy.treysdoublejump.nmsreference.ParticlesMain;
+import me.treyruffy.treysdoublejump.util.ConfigManager;
 import me.treyruffy.treysdoublejump.v1_10_R1.Particle_1_10_R1;
 import me.treyruffy.treysdoublejump.v1_11_R1.Particle_1_11_R1;
 import me.treyruffy.treysdoublejump.v1_12_R1.Particle_1_12_R1;
@@ -71,6 +71,7 @@ public class DoubleJump implements Listener {
 	}
 	
 	// Always checks whether the player can double jump again, and if so, it adds flight to the player
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		final Player p = e.getPlayer();

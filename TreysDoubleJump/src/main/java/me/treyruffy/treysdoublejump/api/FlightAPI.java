@@ -1,11 +1,11 @@
-package me.treyruffy.treysdoublejump.API;
+package me.treyruffy.treysdoublejump.api;
 
-import me.treyruffy.treysdoublejump.Events.FlightCommand;
+import me.treyruffy.treysdoublejump.events.FlightCommand;
 import org.bukkit.entity.Player;
 
 /* Created by TreyRuffy on 08/12/2018. */
 
-/** The Flight API */
+/** The Flight api */
 public class FlightAPI {
 
   /**

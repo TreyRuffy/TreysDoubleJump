@@ -1,4 +1,4 @@
-package me.treyruffy.treysdoublejump.API;
+package me.treyruffy.treysdoublejump.api;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package me.treyruffy.treysdoublejump.Updater;
+package me.treyruffy.treysdoublejump.updater;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -46,6 +46,7 @@ public class UpdateChecker {
 			}
 	}
 	
+	@SuppressWarnings("unused")
 	public static String request(final String RESOURCE_ID) {
 		return request(RESOURCE_ID, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
 	}

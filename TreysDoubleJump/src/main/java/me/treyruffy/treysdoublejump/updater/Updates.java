@@ -1,7 +1,7 @@
-package me.treyruffy.treysdoublejump.Updater;
+package me.treyruffy.treysdoublejump.updater;
 
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
-import me.treyruffy.treysdoublejump.Util.ConfigManager;
+import me.treyruffy.treysdoublejump.util.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

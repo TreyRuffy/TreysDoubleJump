@@ -1,9 +1,9 @@
-package me.treyruffy.treysdoublejump.Util;
+package me.treyruffy.treysdoublejump.util;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import me.treyruffy.treysdoublejump.API.DoubleJumpAPI;
-import me.treyruffy.treysdoublejump.API.FlightAPI;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
+import me.treyruffy.treysdoublejump.api.DoubleJumpAPI;
+import me.treyruffy.treysdoublejump.api.FlightAPI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package me.treyruffy.treysdoublejump.API;
+package me.treyruffy.treysdoublejump.api;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

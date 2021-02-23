@@ -1,6 +1,7 @@
-package me.treyruffy.treysdoublejump.Events;
+package me.treyruffy.treysdoublejump.events;
 
-import me.treyruffy.treysdoublejump.Util.ConfigManager;
+import me.treyruffy.treysdoublejump.TreysDoubleJump;
+import me.treyruffy.treysdoublejump.util.ConfigManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,7 +32,8 @@ public class PlayerWorldSwitchEvent implements Listener {
 		if (!ConfigManager.getConfig().getStringList("EnabledWorlds").contains(p.getWorld().getName())){
 			if (FlightCommand.FlyingPlayers.contains(p.getUniqueId().toString())) {
 				p.setFallDistance(0f);
-				p.sendMessage(ConfigManager.getConfigMessage("FlyToggledOff"));
+				TreysDoubleJump.adventure().player(p).sendMessage(ConfigManager.getConfigMessage(
+						"FlyToggledOff"));
 				FlightCommand.FlyingPlayers.remove(p.getUniqueId().toString());
 			}
 			p.setFlying(false);

@@ -1,17 +1,20 @@
 package me.treyruffy.treysdoublejump;
 
-import me.treyruffy.treysdoublejump.Events.*;
-import me.treyruffy.treysdoublejump.Updater.Updates;
-import me.treyruffy.treysdoublejump.Util.ConfigManager;
-import me.treyruffy.treysdoublejump.Util.PAPI;
-import me.treyruffy.treysdoublejump.Util.UpdateManager;
+import me.treyruffy.treysdoublejump.events.*;
+import me.treyruffy.treysdoublejump.updater.Updates;
+import me.treyruffy.treysdoublejump.util.ConfigManager;
+import me.treyruffy.treysdoublejump.util.PAPI;
+import me.treyruffy.treysdoublejump.util.UpdateManager;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * Created by TreyRuffy on 08/12/2018.
@@ -22,6 +25,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 
 	private static TreysDoubleJump instance;
 
+	private static BukkitAudiences adventure;
+
 	public static TreysDoubleJump getInstance() {
 		return instance;
 	}
@@ -29,12 +34,12 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 	public static File dataFolder;
 
 	private static boolean canUseHex = false;
-	
+
 	// Sets up everything
 	@Override
-	public void onEnable(){
+	public void onEnable() {
 		instance = this;
-		new ConfigManager();
+		adventure = BukkitAudiences.create(this);
 		ConfigManager.reloadConfig();
 		dataFolder = getDataFolder();
 		new UpdateManager().setup();
@@ -45,19 +50,19 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 		pm.registerEvents(new DoubleJump(), this);
 		pm.registerEvents(new NoFallDamage(), this);
 		pm.registerEvents(new PlayerWorldSwitchEvent(), this);
-		
-		getCommand("fly").setExecutor(new FlightCommand());
-		getCommand("tdj").setExecutor(new DoubleJumpCommand());
-		getCommand("djreload").setExecutor(new DoubleJumpCommand());
-		getCommand("groundpound").setExecutor(new GroundPoundCommand());
-		
+
+		Objects.requireNonNull(getCommand("fly")).setExecutor(new FlightCommand());
+		Objects.requireNonNull(getCommand("tdj")).setExecutor(new DoubleJumpCommand());
+		Objects.requireNonNull(getCommand("djreload")).setExecutor(new DoubleJumpCommand());
+		Objects.requireNonNull(getCommand("groundpound")).setExecutor(new GroundPoundCommand());
+
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
 			new PAPI(this).register();
 		}
 		if (ConfigManager.getConfig().getBoolean("Metrics.Enabled")) {
 			new Metrics(this, 1848);
 		}
-		
+
 		String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 		if ((version.equals("v1_8_R1")||version.equals("v1_8_R2")||version.equals("v1_8_R3"))){
 			String s = ConfigManager.getConfig().getString("Sounds.Type");
@@ -69,8 +74,8 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 			}
 		}
 		Updates.updateCheck();
-	}  
-	
+	}
+
 	public static boolean canUseHexColorCode() {
 		return canUseHex;
 	}
@@ -102,7 +107,14 @@ public class TreysDoubleJump extends JavaPlugin implements Listener {
 					useHex = true;
 				}
 				break;
-		}
+			}
 		canUseHex = useHex;
+		}
+
+	public static @NotNull BukkitAudiences adventure() {
+		if (adventure == null) {
+			throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+		}
+		return adventure;
 	}
 }

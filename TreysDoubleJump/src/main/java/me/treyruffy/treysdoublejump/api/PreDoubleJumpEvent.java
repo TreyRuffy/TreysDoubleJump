@@ -1,4 +1,4 @@
-package me.treyruffy.treysdoublejump.API;
+package me.treyruffy.treysdoublejump.api;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -7,6 +7,7 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /** The type Pre double jump event. */
+@SuppressWarnings("unused")
 public class PreDoubleJumpEvent extends Event implements Cancellable {
 
 	private final Player player;

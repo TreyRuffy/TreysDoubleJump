@@ -1,6 +1,9 @@
-package me.treyruffy.treysdoublejump.Util;
+package me.treyruffy.treysdoublejump.util;
 
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -30,25 +33,6 @@ public class ConfigManager {
 	// Accesses the configuration file
 	public static File MainConfigFile;
 
-	// Sets up the config
-	public void setup(){
-		if (!plugin.getDataFolder().exists()) {
-			plugin.getDataFolder().mkdir();
-		}
-
-		MainConfigFile = new File(plugin.getDataFolder(), "config.yml");
-
-		if (!MainConfigFile.exists()) {
-			try {
-				MainConfigFile.createNewFile();
-			} catch (IOException e) {
-				Bukkit.getServer().getLogger().log(Level.SEVERE, "Could not save " + MainConfigFile + ".", e);
-			}
-		}
-
-		MainConfig = YamlConfiguration.loadConfiguration(MainConfigFile);
-	}
-	
 	// Gets the config
 	public static FileConfiguration getConfig() {
 		if (MainConfig == null) {
@@ -82,7 +66,13 @@ public class ConfigManager {
 		}
 	}
 
-	public static String getConfigMessage(String message) {
+	public static Component getConfigMessage(String message) {
+		String oldConfigMessage = getOldConfigMessage(message);
+		Component a = LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).deserialize(oldConfigMessage);
+		return MiniMessage.get().parse(MiniMessage.get().serialize(a));
+	}
+
+	private static String getOldConfigMessage(String message) {
 		String messageFromConfig = getConfig().getString("Messages." + message);
 		if (messageFromConfig == null) {
 			return ChatColor.RED + "Messages. " + message + " is not set in the config.";

@@ -3,7 +3,7 @@
   <parent>
     <artifactId>TreysDoubleJumpMain</artifactId>
     <groupId>me.treyruffy.treysdoublejump</groupId>
-    <version>2.6.3</version>
+    <version>2.6.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>TreysDoubleJump</artifactId>
@@ -45,7 +45,11 @@
           <relocations>
             <relocation>
               <pattern>org.bstats</pattern>
-              <shadedPattern>me.treyruffy.treysdoublejump.Util</shadedPattern>
+              <shadedPattern>me.treyruffy.treysdoublejump.util.metrics</shadedPattern>
+            </relocation>
+            <relocation>
+              <pattern>net.kyori</pattern>
+              <shadedPattern>me.treyruffy.treysdoublejump.util.adventure</shadedPattern>
             </relocation>
           </relocations>
           <artifactSet>
@@ -54,6 +58,7 @@
               <include>me.treyruffy.treysdoublejump:TreysDoubleJumpNmsReference</include>
               <include>org.bstats:bstats-bukkit</include>
               <include>commons-io</include>
+              <include>net.kyori</include>
             </includes>
           </artifactSet>
         </configuration>

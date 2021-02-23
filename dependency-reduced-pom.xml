@@ -48,7 +48,7 @@
           <relocations>
             <relocation>
               <pattern>org.bstats</pattern>
-              <shadedPattern>me.treyruffy.treysdoublejump.Util</shadedPattern>
+              <shadedPattern>me.treyruffy.treysdoublejump.util</shadedPattern>
             </relocation>
           </relocations>
         </configuration>

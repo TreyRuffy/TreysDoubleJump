@@ -1,7 +1,7 @@
 package me.treyruffy.treysdoublejump;
 
-import me.treyruffy.treysdoublejump.Util.ConfigManager;
 import me.treyruffy.treysdoublejump.nmsreference.ParticlesMain;
+import me.treyruffy.treysdoublejump.util.ConfigManager;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
