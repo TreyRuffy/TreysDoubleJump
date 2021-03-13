@@ -265,6 +265,11 @@ public class DoubleJump implements Listener {
 		e.setCancelled(true);
 		p.setAllowFlight(false);
 		p.setFlying(false);
+		try {
+			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+				p.setCanFlyFallDamage(true);
+		} catch (NoSuchMethodError ignored) {}
+
 
         if (doubleJumpEvent.isCancelled()) {
         	return;

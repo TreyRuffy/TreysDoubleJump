@@ -37,7 +37,7 @@ public class GroundPoundEvent extends Event implements Cancellable {
 
 	@Override
 	public boolean isCancelled() {
-		return false;
+		return this.isCancelled;
 	}
 
 	@Override
