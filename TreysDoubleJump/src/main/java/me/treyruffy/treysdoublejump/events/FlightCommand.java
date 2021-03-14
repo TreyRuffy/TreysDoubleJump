@@ -166,6 +166,10 @@ public class FlightCommand implements CommandExecutor {
 		player.setFallDistance(0f);
 		player.setAllowFlight(false);
 		player.setFlying(false);
+		try {
+			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+				player.setEnableFallDamageWhileAllowFlight(false);
+		} catch (NoSuchMethodError ignored) {}
 		FlyingPlayers.remove(player.getUniqueId().toString());
 	}
 
@@ -173,6 +177,10 @@ public class FlightCommand implements CommandExecutor {
 		player.setFallDistance(0f);
 		DoubleJump.Grounded.remove(player.getUniqueId().toString());
 		player.setAllowFlight(true);
+		try {
+			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+				player.setEnableFallDamageWhileAllowFlight(false);
+		} catch (NoSuchMethodError ignored) {}
 		player.setFlying(true);
 		FlyingPlayers.add(player.getUniqueId().toString());
 	}

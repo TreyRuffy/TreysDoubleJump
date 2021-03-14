@@ -127,6 +127,10 @@ public class DoubleJump implements Listener {
 							return;
 						}
 						p.setAllowFlight(true);
+						try {
+							if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+								p.setEnableFallDamageWhileAllowFlight(true);
+						} catch (NoSuchMethodError ignored) {}
 						Grounded.remove(p.getUniqueId().toString());
 						return;
 					}
@@ -138,6 +142,10 @@ public class DoubleJump implements Listener {
 						return;
 					}
 					p.setAllowFlight(true);
+					try {
+						if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+							p.setEnableFallDamageWhileAllowFlight(true);
+					} catch (NoSuchMethodError ignored) {}
 					Grounded.remove(p.getUniqueId().toString());
 					NCP(p);
 					return;
@@ -153,6 +161,10 @@ public class DoubleJump implements Listener {
 							return;
 						}
 						p.setAllowFlight(true);
+						try {
+							if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+								p.setEnableFallDamageWhileAllowFlight(true);
+						} catch (NoSuchMethodError ignored) {}
 					}, 1L);
 		} else {
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
@@ -165,6 +177,10 @@ public class DoubleJump implements Listener {
 							return;
 						}
 						p.setAllowFlight(true);
+						try {
+							if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+								p.setEnableFallDamageWhileAllowFlight(true);
+						} catch (NoSuchMethodError ignored) {}
 						return;
 					}
 					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
@@ -175,6 +191,10 @@ public class DoubleJump implements Listener {
 						return;
 					}
 					p.setAllowFlight(true);
+					try {
+						if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+							p.setEnableFallDamageWhileAllowFlight(true);
+					} catch (NoSuchMethodError ignored) {}
 					NCP(p);
 				}
 				return;
@@ -186,6 +206,10 @@ public class DoubleJump implements Listener {
 				return;
 			}
 			p.setAllowFlight(true);
+			try {
+				if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+					p.setEnableFallDamageWhileAllowFlight(true);
+			} catch (NoSuchMethodError ignored) {}
 		}
 		
 		
@@ -264,11 +288,11 @@ public class DoubleJump implements Listener {
 
 		e.setCancelled(true);
 		p.setAllowFlight(false);
-		p.setFlying(false);
 		try {
 			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
-				p.setCanFlyFallDamage(true);
+				p.setEnableFallDamageWhileAllowFlight(false);
 		} catch (NoSuchMethodError ignored) {}
+		p.setFlying(false);
 
 
         if (doubleJumpEvent.isCancelled()) {

@@ -200,6 +200,10 @@ public class DoubleJumpCommand implements CommandExecutor {
 		}
 		if (!FlightCommand.FlyingPlayers.contains(player.getUniqueId().toString())) {
 			player.setAllowFlight(false);
+			try {
+				if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
+					player.setEnableFallDamageWhileAllowFlight(false);
+			} catch (NoSuchMethodError ignored) {}
 			player.setFlying(false);
 		}
 		return true;
