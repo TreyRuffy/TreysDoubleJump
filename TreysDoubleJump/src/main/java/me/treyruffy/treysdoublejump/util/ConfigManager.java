@@ -3,7 +3,6 @@ package me.treyruffy.treysdoublejump.util;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -68,8 +67,7 @@ public class ConfigManager {
 
 	public static Component getConfigMessage(String message) {
 		String oldConfigMessage = getOldConfigMessage(message);
-		Component a = LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).deserialize(oldConfigMessage);
-		return MiniMessage.get().parse(MiniMessage.get().serialize(a));
+		return MiniMessage.get().parse(oldConfigMessage);
 	}
 
 	private static String getOldConfigMessage(String message) {
