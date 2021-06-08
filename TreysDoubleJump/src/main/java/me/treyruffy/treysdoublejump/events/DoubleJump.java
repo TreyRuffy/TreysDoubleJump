@@ -93,7 +93,7 @@ public class DoubleJump implements Listener {
 		if (!ConfigManager.getConfig().getStringList("DisabledBlocks").isEmpty()) {
 			for (String blocks : ConfigManager.getConfig().getStringList("DisabledBlocks")) {
 				try {
-					if (p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.valueOf(blocks.toUpperCase())) {
+					if (p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.valueOf(blocks.toUpperCase()) || p.getWorld().getBlockAt(p.getLocation()).getType() == Material.valueOf(blocks.toUpperCase())) {
 						Grounded.remove(p.getUniqueId().toString());
 						return;
 					}
@@ -112,7 +112,7 @@ public class DoubleJump implements Listener {
 			return;
 		}
 		if (!ConfigManager.getConfig().getBoolean("InfiniteJump.Enabled") || !p.hasPermission("tdj.infinitejump")) {
-			if (!p.isOnGround() || p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.AIR) {
+			if (!p.isOnGround() || (p.getWorld().getBlockAt(p.getLocation().add(0, -1, 0)).getType() == Material.AIR && p.getWorld().getBlockAt(p.getLocation()).getType() == Material.AIR)) {
 				return;
 			}
 
@@ -165,6 +165,7 @@ public class DoubleJump implements Listener {
 							if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
 								p.setEnableFallDamageWhileAllowFlight(true);
 						} catch (NoSuchMethodError ignored) {}
+						Grounded.remove(p.getUniqueId().toString());
 					}, 1L);
 		} else {
 			if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
@@ -181,6 +182,7 @@ public class DoubleJump implements Listener {
 							if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
 								p.setEnableFallDamageWhileAllowFlight(true);
 						} catch (NoSuchMethodError ignored) {}
+						Grounded.remove(p.getUniqueId().toString());
 						return;
 					}
 					NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
@@ -195,6 +197,7 @@ public class DoubleJump implements Listener {
 						if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
 							p.setEnableFallDamageWhileAllowFlight(true);
 					} catch (NoSuchMethodError ignored) {}
+					Grounded.remove(p.getUniqueId().toString());
 					NCP(p);
 				}
 				return;
@@ -210,6 +213,7 @@ public class DoubleJump implements Listener {
 				if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
 					p.setEnableFallDamageWhileAllowFlight(true);
 			} catch (NoSuchMethodError ignored) {}
+			Grounded.remove(p.getUniqueId().toString());
 		}
 		
 		
@@ -361,6 +365,7 @@ public class DoubleJump implements Listener {
 				case "v1_16_R1":
 				case "v1_16_R2":
 				case "v1_16_R3":
+				case "v1_17_R1":
 					particles = new Particle_1_16_R3();
 					break;
 				default:

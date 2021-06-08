@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 public class NoFallDamage implements Listener {
 
 	// Cancels damage if no fall is enabled
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void noFall(EntityDamageEvent e) {
 		if ((!e.getCause().equals(DamageCause.FALL))) {
 			return;
