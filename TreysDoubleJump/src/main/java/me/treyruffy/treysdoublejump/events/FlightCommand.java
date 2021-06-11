@@ -2,7 +2,7 @@ package me.treyruffy.treysdoublejump.events;
 
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.util.ConfigManager;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -71,7 +71,8 @@ public class FlightCommand implements CommandExecutor {
 						turnFlyOn(sender, username);
 					} else if (args[1].equalsIgnoreCase("disable")) {
 						TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-								"FlyToggledOffOther").replaceText("[user]", Component.text(username.getName())));
+								"FlyToggledOffOther").replaceText(TextReplacementConfig.builder().matchLiteral("[user" +
+								"]").replacement(username.getName()).build()));
 						addDisabledFlightPlayer(username);
 						if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
 								"FlightToggledOff")).equalsIgnoreCase(""))
@@ -90,7 +91,7 @@ public class FlightCommand implements CommandExecutor {
 
 				if (FlyingPlayers.contains(username.getUniqueId().toString())) {
 					TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-							"FlyToggledOffOther").replaceText("[user]", Component.text(username.getName())));
+							"FlyToggledOffOther").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(username.getName()).build()));
 					addDisabledFlightPlayer(username);
 
 					if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
@@ -106,7 +107,7 @@ public class FlightCommand implements CommandExecutor {
 			} else {
 				if (sender.hasPermission("tdj.fly.toggleothers")) {
 					TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-							"PlayerNotFound").replaceText("[user]", Component.text(args[0])));
+							"PlayerNotFound").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(args[0]).build()));
 				} else if (sender.hasPermission("tdj.fly")) {
 					TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage("InvalidFlyArgument"));
 				} else {
@@ -150,7 +151,7 @@ public class FlightCommand implements CommandExecutor {
 
 	private void turnFlyOn(@NotNull CommandSender sender, Player username) {
 		TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-				"FlyToggledOnOther").replaceText("[user]", Component.text(username.getName())));
+				"FlyToggledOnOther").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(username.getName()).build()));
 		addEnabledFlightPlayer(username);
 		if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
 				"FlightToggledOn")).equalsIgnoreCase(""))
@@ -168,7 +169,7 @@ public class FlightCommand implements CommandExecutor {
 		player.setFlying(false);
 		try {
 			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
-				player.setEnableFallDamageWhileAllowFlight(false);
+				player.setFlyingFallDamage(false);
 		} catch (NoSuchMethodError ignored) {}
 		FlyingPlayers.remove(player.getUniqueId().toString());
 	}
@@ -179,7 +180,7 @@ public class FlightCommand implements CommandExecutor {
 		player.setAllowFlight(true);
 		try {
 			if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
-				player.setEnableFallDamageWhileAllowFlight(false);
+				player.setFlyingFallDamage(false);
 		} catch (NoSuchMethodError ignored) {}
 		player.setFlying(true);
 		FlyingPlayers.add(player.getUniqueId().toString());

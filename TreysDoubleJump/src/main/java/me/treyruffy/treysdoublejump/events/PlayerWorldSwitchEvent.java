@@ -40,7 +40,7 @@ public class PlayerWorldSwitchEvent implements Listener {
 			p.setAllowFlight(false);
 			try {
 				if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
-					p.setEnableFallDamageWhileAllowFlight(false);
+					p.setFlyingFallDamage(false);
 			} catch (NoSuchMethodError ignored) {}
 		}
 	}

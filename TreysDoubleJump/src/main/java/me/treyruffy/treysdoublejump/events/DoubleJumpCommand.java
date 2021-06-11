@@ -3,7 +3,7 @@ package me.treyruffy.treysdoublejump.events;
 import me.treyruffy.treysdoublejump.TreysDoubleJump;
 import me.treyruffy.treysdoublejump.util.ConfigManager;
 import me.treyruffy.treysdoublejump.util.UpdateManager;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -76,7 +76,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 					// Player is not online
 					if (!username.isOnline()) {
 						TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-								"PlayerNotFound").replaceText("[user]", Component.text(args[0])));
+								"PlayerNotFound").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(args[0]).build()));
 						return true;
 					}
 					else if (args.length >= 2) {
@@ -84,7 +84,8 @@ public class DoubleJumpCommand implements CommandExecutor {
 						if (args[1].equalsIgnoreCase("enable")) {
 							if (addEnabledPlayer(username)) {
 								TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-										"ToggledOnOther").replaceText("[user]", Component.text(username.getName())));
+										"ToggledOnOther").replaceText(TextReplacementConfig.builder().matchLiteral(
+												"[user]").replacement(username.getName()).build()));
 								if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
 										"DoubleJumpToggledOn")).equalsIgnoreCase(""))
 									TreysDoubleJump.adventure().player(username).sendMessage(ConfigManager.getConfigMessage(
@@ -107,7 +108,8 @@ public class DoubleJumpCommand implements CommandExecutor {
 						if (DisablePlayers.contains(username.getUniqueId().toString()) || FlightCommand.FlyingPlayers.contains(username.getUniqueId().toString())) {
 							if (addEnabledPlayer(username)) {
 								TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-										"ToggledOnOther").replaceText("[user]", Component.text(username.getName())));
+										"ToggledOnOther").replaceText(TextReplacementConfig.builder().matchLiteral(
+												"[user]").replacement(username.getName()).build()));
 								if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
 										"DoubleJumpToggledOff")).equalsIgnoreCase(""))
 									TreysDoubleJump.adventure().player(username).sendMessage(ConfigManager.getConfigMessage(
@@ -122,7 +124,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 				else {
 					if (!(sender instanceof Player)) {
 						TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-								"PlayerNotFound").replaceText("[user]", Component.text(args[0])));
+								"PlayerNotFound").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(args[0]).build()));
 						return true;
 					}
 					if (!sender.hasPermission("tdj.toggleothers")) {
@@ -131,7 +133,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 						return true;
 					}
 					TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-							"PlayerNotFound").replaceText("[user]", Component.text(args[0])));
+							"PlayerNotFound").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(args[0]).build()));
 					return true;
 				}
 				return true;
@@ -181,8 +183,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 	private void turnDJOff(@NotNull CommandSender sender, Player username) {
 		if (addDisabledPlayer(username)) {
 			TreysDoubleJump.adventure().sender(sender).sendMessage(ConfigManager.getConfigMessage(
-					"ToggledOffOther").replaceText("[user]",
-					Component.text(username.getName())));
+					"ToggledOffOther").replaceText(TextReplacementConfig.builder().matchLiteral("[user]").replacement(username.getName()).build()));
 			if (!LegacyComponentSerializer.legacy(ChatColor.COLOR_CHAR).serialize(ConfigManager.getConfigMessage(
 					"DoubleJumpToggledOff")).equalsIgnoreCase(""))
 				TreysDoubleJump.adventure().player(username).sendMessage(ConfigManager.getConfigMessage(
@@ -202,7 +203,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 			player.setAllowFlight(false);
 			try {
 				if (!ConfigManager.getConfig().getBoolean("NoFall.Enabled"))
-					player.setEnableFallDamageWhileAllowFlight(false);
+					player.setFlyingFallDamage(false);
 			} catch (NoSuchMethodError ignored) {}
 			player.setFlying(false);
 		}
