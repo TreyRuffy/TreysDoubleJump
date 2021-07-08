@@ -11,13 +11,6 @@
     <artifactId>TreysDoubleJump</artifactId>
     <name>TreysDoubleJump</name>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>Apache-Snapshots</id>
-            <url>https://repository.apache.org/snapshots/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <directory>../target</directory>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -36,14 +29,14 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0-SNAPSHOT</version>
+                <version>3.1.1</version>
                 <configuration>
                     <relocations>
                         <relocation>
@@ -114,7 +107,7 @@
         <dependency>
             <groupId>net.pl3x.purpur</groupId>
             <artifactId>purpur-api</artifactId>
-            <version>1.17-R0.1-SNAPSHOT</version>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
