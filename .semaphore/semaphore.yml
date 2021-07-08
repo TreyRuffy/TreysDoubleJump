@@ -11,7 +11,7 @@ blocks:
         - name: Build
           commands:
             - checkout
-            - sem-version java 1.8
+            - sem-version java 16
             - cache restore
             - chmod +rx setupCraftbukkit.sh
             - 'if [ ! -f "$HOME/.m2/repository/org/bukkit/craftbukkit/1.8-R0.1-SNAPSHOT/craftbukkit-1.8-R0.1-SNAPSHOT.jar" ]; then ./setupCraftbukkit.sh 1.8 ; else echo "Not compiling CraftBukkit 1.8 because it is already in our maven repo" ; fi'
